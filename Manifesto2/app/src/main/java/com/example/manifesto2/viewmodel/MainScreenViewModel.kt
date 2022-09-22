@@ -16,10 +16,10 @@ class MainScreenViewModel: ViewModel(){
     fun iniciar(){
         viewModelScope.launch {
             personalList.value = withContext(Dispatchers.IO){
-                db.formDao().insertPerson(arrayListOf<FormEntity>(
+                /*db.formDao().insertPerson(arrayListOf<FormEntity>(
                     FormEntity(0,"Claudia",8183394025, "c@gmail.com", 8183394026, "Mom" ),
                     FormEntity(0,"Jair",8183394027, "j@gmail.com", 8183394026, "Mom" )
-                ))
+                ))*/
                 db.formDao().getAll()
             }
             for (formEntity in personalList.value!!){

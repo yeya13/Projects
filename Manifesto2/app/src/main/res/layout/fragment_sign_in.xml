@@ -80,11 +80,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:id="@+id/edtFullName"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
                     android:textSize="12sp"
+
 
                     />
 
@@ -111,7 +113,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +139,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="phone"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,7 +191,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

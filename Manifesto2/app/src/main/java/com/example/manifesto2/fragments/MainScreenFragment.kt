@@ -5,16 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
 import com.example.manifesto2.R
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.manifesto2.adapter.FormAdapter
 import com.example.manifesto2.databinding.FragmentMainScreenBinding
 import com.example.manifesto2.viewmodel.MainScreenViewModel
 
@@ -38,6 +36,13 @@ class MainScreenFragment : Fragment() {
         //Test database
         viewModel = ViewModelProvider(this).get()
         viewModel.iniciar()
+
+        binding.myRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+        }
+        viewModel.personalList.observe(viewLifecycleOwner, Observer {
+            binding.myRecyclerView.adapter = FormAdapter(it)
+        })
         return binding.root
 
 

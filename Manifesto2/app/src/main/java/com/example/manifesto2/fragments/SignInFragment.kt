@@ -52,7 +52,6 @@ class SignInFragment : Fragment() {
 
     private fun validateForm():Boolean {
         var isValid = true
-        val Full_Name_Pattern = "[AZ][az]+( [AZ][az]+)*"
         val email=binding.edtEmail.text.toString()
         with(binding){
             //Validar Full Name

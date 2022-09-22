@@ -13,9 +13,6 @@
         android:background="#1f1f39"
         tools:context=".fragments.MainScreenFragment">
 
-
-
-
         <ImageView
             android:id="@+id/top_background"
             android:layout_width="wrap_content"
@@ -76,16 +73,19 @@
             android:text="Manifesto" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:background="@color/manifesto"
+            android:layout_marginBottom="90.3dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
             app:layout_constraintTop_toBottomOf="@+id/top_background" />
+
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_width="150.3dp"
-            android:layout_height="41.3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,5 +100,4 @@
             android:textColor="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

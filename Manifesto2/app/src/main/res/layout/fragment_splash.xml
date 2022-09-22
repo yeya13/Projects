@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9393aa"
+    android:background="@color/background_splash"
     tools:context=".fragments.SplashFragment">
 
     <TextView
         style="@style/TextStyle3"
+        android:id="@+id/iconM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="66dp"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/manifesto"
+        android:id="@+id/iconManifesto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="66dp"
