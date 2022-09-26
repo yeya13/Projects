@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">manifesto</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="m">M</string>
+    <string name="manifesto">Manifesto</string>
+    <string name="sign_in">Sign in</string>
+    <string name="warningString">No one has currently signed in. Be the first to sign.</string>
+    <string name="warningStringWithRV">Sign in at the registry.</string>
+</resources>
