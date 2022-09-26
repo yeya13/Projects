@@ -1,5 +1,6 @@
 package com.example.manifesto.viewmodels
 
+import android.app.Person
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,16 +33,14 @@ class SignInViewModel:ViewModel() {
     fun updateUser(){
     }
 
-    fun loadData() {
+    fun loadData(person: FormEntity) {
         viewModelScope.launch {
-            val person = withContext(Dispatchers.IO){
-                DB3.formDao().getById(id.value!!)
-            }
-            name.value = person.fullName
-            phoneNum.value = person.phoneNumber
-            email.value = person.email
-            emergencyNum.value = person.emergencyNumber
-            emergencyName.value = person.emergencyName
+                name.value = person.fullName
+                phoneNum.value = person.phoneNumber
+                email.value = person.email
+                emergencyNum.value = person.emergencyNumber
+                emergencyName.value = person.emergencyName
+
         }
     }
 }

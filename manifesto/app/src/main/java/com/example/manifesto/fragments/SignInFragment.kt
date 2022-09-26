@@ -1,6 +1,7 @@
 package com.example.manifesto.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.manifesto.R
 import com.example.manifesto.databinding.FragmentSignInBinding
 import com.example.manifesto.viewmodels.SignInViewModel
@@ -19,6 +21,7 @@ import com.example.manifesto.viewmodels.SignInViewModel
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInViewModel
+    val args: SignInFragmentArgs? by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,15 +36,12 @@ class SignInFragment : Fragment() {
 
 
         //This function checks if there is something in arguments(id from person)
-            if (arguments != null){
-                //val id = requireArguments().getLong("id")
-                binding.btnSignSave.visibility = View.GONE
-                //viewModel.loadData()
-                binding.btnSave.visibility = View.VISIBLE
-            }else{
-                binding.btnSignSave.visibility = View.VISIBLE
-                binding.btnSave.visibility = View.GONE
-            }
+        Log.i("angie", "${args?.formPerson}")
+        args?.formPerson?.let {
+            binding.btnSignSave.visibility = View.GONE
+            viewModel.loadData(it)
+            binding.btnSave.visibility = View.VISIBLE
+        }?: recieveOnClickedUser()
 
         return binding.root
     }
@@ -139,5 +139,10 @@ class SignInFragment : Fragment() {
     //Update Data
     private fun updateData(){
 
+    }
+
+    private fun recieveOnClickedUser(){
+        binding.btnSignSave.visibility = View.VISIBLE
+        binding.btnSave.visibility = View.GONE
     }
 }

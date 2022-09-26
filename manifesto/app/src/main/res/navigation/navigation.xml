@@ -14,20 +14,32 @@
             android:id="@+id/action_splashFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.manifesto.fragments.MainScreenFragment"
         android:label="MainScreenFragment" >
         <action
             android:id="@+id/action_mainScreenFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment">
+            <argument
+                android:name="formPerson"
+                app:argType="com.example.manifesto.database.models.FormEntity" />
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.manifesto.fragments.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_mainScreenFragment"
-            app:destination="@id/mainScreenFragment" />
+            app:destination="@id/mainScreenFragment">
+        </action>
+        <argument
+            android:name="formPerson"
+            app:argType="com.example.manifesto.database.models.FormEntity"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
 </navigation>
