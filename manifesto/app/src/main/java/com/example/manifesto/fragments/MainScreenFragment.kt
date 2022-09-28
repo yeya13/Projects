@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.manifesto.R
@@ -23,6 +25,8 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
     private lateinit var viewModel: MainScreenViewModel
+    private lateinit var adapter: FormAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,20 +48,22 @@ class MainScreenFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
 
         }
-        viewModel.personalList.observe(viewLifecycleOwner, Observer {
-            binding.myRecyclerView.adapter = FormAdapter(it)
-        })
 
-        //Condition to show if the recyclerView is empty
-        if(binding.myRecyclerView.adapter?.itemCount == 0){
-            binding.warning.visibility = View.VISIBLE
-            binding.warningWithRV.visibility = View.GONE
-            binding.myRecyclerView.visibility = View.GONE
-        }else{
-            binding.warning.visibility = View.GONE
-            binding.warningWithRV.visibility = View.VISIBLE
-            binding.myRecyclerView.visibility = View.VISIBLE
-        }
+        viewModel.personalList.observe(viewLifecycleOwner, Observer {
+            adapter = FormAdapter(it, viewModel)
+            binding.myRecyclerView.adapter = adapter
+
+            //Condition to show if the recyclerView is empty
+            if(binding.myRecyclerView.adapter?.itemCount== 0){
+                binding.warning.visibility = View.VISIBLE
+                binding.warningWithRV.visibility = View.GONE
+                binding.myRecyclerView.visibility = View.GONE
+            }else{
+                binding.warning.visibility = View.GONE
+                binding.warningWithRV.visibility = View.VISIBLE
+                binding.myRecyclerView.visibility = View.VISIBLE
+            }
+        })
 
         return binding.root
     }

@@ -1,6 +1,5 @@
 package com.example.manifesto.viewmodels
 
-import android.app.Person
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SignInViewModel:ViewModel() {
-    val id = MutableLiveData<Long>()
+    val id= MutableLiveData<Long>(0)
     val name = MutableLiveData<String>()
     val phoneNum = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -20,21 +19,41 @@ class SignInViewModel:ViewModel() {
     val opSuccessful = MutableLiveData<Boolean>()
 
     fun saveUser(){
-        var obFormEntity =  FormEntity(0, name.value!!, phoneNum.value!!, email.value!!, emergencyNum.value!!, emergencyName.value!!)
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO){
-               DB3.formDao().insertPerson(arrayListOf<FormEntity>(
-                   obFormEntity
-               ))
+        val obFormEntity = getPersonData()
+            viewModelScope.launch {
+                val result = withContext(Dispatchers.IO){
+                    DB3.formDao().insertPerson(arrayListOf<FormEntity>(
+                        obFormEntity
+                    ))
+                }
             }
-        }
+    }
+
+    fun getPersonData(): FormEntity {
+        return FormEntity(
+            id.value ?: 0,
+            name.value ?: "",
+            phoneNum.value ?: "",
+            email.value ?: "",
+            emergencyNum.value ?: "",
+            emergencyName.value ?: ""
+        )
     }
 
     fun updateUser(){
+        val obFormEntity = getPersonData()
+            viewModelScope.launch {
+                val result = withContext(Dispatchers.IO) {
+                    DB3.formDao().updatePerson(obFormEntity)
+                }
+                opSuccessful.value = (result>0)
+        }
     }
+
 
     fun loadData(person: FormEntity) {
         viewModelScope.launch {
+                id.value = person.id
                 name.value = person.fullName
                 phoneNum.value = person.phoneNumber
                 email.value = person.email
@@ -43,4 +62,14 @@ class SignInViewModel:ViewModel() {
 
         }
     }
+
+    /*fun deleteUser() {
+        val obFormEntity = getPersonData()
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                DB3.formDao().deletePerson(obFormEntity)
+            }
+            opSuccessful.value = (result>0)
+        }
+    }*/
 }

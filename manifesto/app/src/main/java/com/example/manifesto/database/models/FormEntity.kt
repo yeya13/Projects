@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "person_information_table")
 data class FormEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    var id: Long,
     val fullName: String,
     val phoneNumber: String,
     val email: String,

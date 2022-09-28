@@ -1,6 +1,7 @@
 package com.example.manifesto.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,5 +25,12 @@ class MainScreenViewModel: ViewModel(){
         }
     }
 
-
+    fun deleteUser(obFormEntity: FormEntity) {
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                DB3.formDao().deletePerson(obFormEntity)
+            }
+            testDB()
+        }
+    }
 }

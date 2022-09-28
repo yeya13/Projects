@@ -9,16 +9,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.util.PatternsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.manifesto.R
 import com.example.manifesto.databinding.FragmentSignInBinding
+import com.example.manifesto.dialogues.DeleteDialog
 import com.example.manifesto.viewmodels.SignInViewModel
 
 
-class SignInFragment : Fragment() {
+class SignInFragment : Fragment(){
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInViewModel
     val args: SignInFragmentArgs? by navArgs()
@@ -29,7 +32,6 @@ class SignInFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in,container,false)
-
         viewModel = ViewModelProvider(this).get()
         binding.model = viewModel
         binding.lifecycleOwner
@@ -37,12 +39,21 @@ class SignInFragment : Fragment() {
 
         //This function checks if there is something in arguments(id from person)
         Log.i("angie", "${args?.formPerson}")
-        args?.formPerson?.let {
+        args?.formPerson?.let { person ->
             binding.btnSignSave.visibility = View.GONE
-            viewModel.loadData(it)
+            viewModel.loadData(person)
             binding.btnSave.visibility = View.VISIBLE
-        }?: recieveOnClickedUser()
+        }?: receiveOnClickedUser()
 
+        //test function update
+        viewModel.opSuccessful.observe(viewLifecycleOwner, Observer{
+            if(it){
+                showMessage("Succesful Update")
+                findNavController().navigate(R.id.action_signInFragment_to_mainScreenFragment)
+            }else{
+                showMessage("Error Update")
+            }
+        })
         return binding.root
     }
 
@@ -136,13 +147,9 @@ class SignInFragment : Fragment() {
         return isValidSendData
     }
 
-    //Update Data
-    private fun updateData(){
-
-    }
-
-    private fun recieveOnClickedUser(){
+    private fun receiveOnClickedUser(){
         binding.btnSignSave.visibility = View.VISIBLE
         binding.btnSave.visibility = View.GONE
     }
+
 }

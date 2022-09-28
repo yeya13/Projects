@@ -7,4 +7,7 @@
     <string name="sign_in">Sign in</string>
     <string name="warningString">No one has currently signed in. Be the first to sign.</string>
     <string name="warningStringWithRV">Sign in at the registry.</string>
+    <string name="delete_person">Continue to delete? %1$s</string>
+    <string name="allow">ALLOW</string>
+    <string name="deny">DENY</string>
 </resources>
