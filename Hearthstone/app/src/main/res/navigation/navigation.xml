@@ -9,5 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.hearthstone.ui.HomePage.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchPageFragment"
+            app:destination="@id/searchPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPageFragment"
+        android:name="com.example.hearthstone.ui.SearchPage.SearchPageFragment"
+        android:label="fragment_search_page"
+        tools:layout="@layout/fragment_search_page" />
 </navigation>

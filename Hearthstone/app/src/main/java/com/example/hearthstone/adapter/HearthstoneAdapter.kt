@@ -3,6 +3,7 @@ package com.example.hearthstone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.R
 import com.example.hearthstone.databinding.CardItemBinding
@@ -58,6 +59,10 @@ class HearthstoneAdapter(private var cards: List<String>) :
                 binding.txt.text = card
                 binding.cardImage.setImageResource(R.drawable.photo_copy_2)
                 }
+            }
+
+            binding.cardImage.setOnClickListener{v: View ->
+                v.findNavController().navigate(R.id.action_homeFragment_to_searchPageFragment)
             }
         }
     }
