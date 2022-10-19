@@ -7,12 +7,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.R
 import com.example.hearthstone.databinding.CardItemBinding
+import com.example.hearthstone.ui.homepage.HomeFragmentDirections
 
 class HearthstoneAdapter(private var cards: List<String>) :
     RecyclerView.Adapter<HearthstoneAdapter.HearthstoneViewHolder>(){
 
     inner class HearthstoneViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var binding = CardItemBinding.bind(view)
+        private var binding = CardItemBinding.bind(view)
 
         fun bindCard(card: String){
             when(card){
@@ -60,9 +61,9 @@ class HearthstoneAdapter(private var cards: List<String>) :
                 binding.cardImage.setImageResource(R.drawable.photo_copy_2)
                 }
             }
-
             binding.cardImage.setOnClickListener{v: View ->
-                v.findNavController().navigate(R.id.action_homeFragment_to_searchPageFragment)
+                val action = HomeFragmentDirections.actionHomeFragmentToSearchPageFragment(card)
+                v.findNavController().navigate(action)
             }
         }
     }
