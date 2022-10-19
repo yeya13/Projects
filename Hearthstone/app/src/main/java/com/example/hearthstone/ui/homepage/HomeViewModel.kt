@@ -9,10 +9,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hearthstone.data.network.repo.HSRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomeViewModel (app: Application, private val repo: HSRepo): AndroidViewModel(app) {
+@HiltViewModel
+class HomeViewModel @Inject constructor (app: Application, private val repo: HSRepo, private val dispatcher: Dispatchers): AndroidViewModel(app) {
     private val _cards = MutableLiveData<List<String>?>()
     val cards: LiveData<List<String>?> = _cards
 
@@ -21,7 +23,7 @@ class HomeViewModel (app: Application, private val repo: HSRepo): AndroidViewMod
     }
 
     private fun getCardsByClass(){
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCards()
             Log.d("Angie", "$cardsFetched")
             _cards.postValue(cardsFetched?.classes)

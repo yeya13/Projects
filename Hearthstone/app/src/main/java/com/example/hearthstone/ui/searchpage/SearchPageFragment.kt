@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hearthstone.MainActivity
@@ -18,12 +19,13 @@ import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchPageFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchPageBinding
-    private lateinit var viewModel: SearchPageViewModel
+    private val viewModel: SearchPageViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
 
 
@@ -44,8 +46,7 @@ class SearchPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         goHome()
         buttonSearch()
-        viewModel =
-            SearchPageViewModel(MainActivity.ourApplication, HSRepo.provideHSRepoApi())
+        //viewModel = SearchPageViewModel(MainActivity.ourApplication, HSRepo.provideHSRepoApi())
 
 
         Log.i("arg", "${args.hsClass}")
