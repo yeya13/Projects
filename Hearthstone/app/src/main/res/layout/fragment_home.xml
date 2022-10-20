@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/emblem"
-        android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="23dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="23dp"
@@ -24,11 +24,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="98dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="98dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,20 +37,18 @@
         android:id="@+id/particles"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="23dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="111.3dp"
         android:src="@drawable/particles"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/background_tint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="295dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:src="@drawable/tint"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
