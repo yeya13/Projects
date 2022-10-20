@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="messageError">That name does not exist.</string>
     <string name="ok">OK</string>
+    <string name="search_cards">Search cards</string>
+    <string name="search">Search</string>
 </resources>
