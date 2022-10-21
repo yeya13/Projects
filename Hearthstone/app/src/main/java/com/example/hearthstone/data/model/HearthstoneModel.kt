@@ -6,5 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class HearthstoneModel (
-    @SerializedName("classes") var classes: List<String>
+    @SerializedName("classes")
+    var classes: List<String>
     ):Parcelable
