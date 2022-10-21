@@ -10,4 +10,6 @@
     <color name="yellow_low">#80FBCD1F</color>
     <color name="white_low">#80FFFFFF</color>
     <color name="brown">#3b1718</color>
+    <color name="shadow_black">#80000000</color>
+    <color name="yellow_letters">#fbcd1f</color>
 </resources>
