@@ -1,6 +1,7 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 @AndroidEntryPoint
 class SearchPageFragment : Fragment() {
@@ -41,15 +43,11 @@ class SearchPageFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         goHome()
         buttonSearch()
-        //viewModel = SearchPageViewModel(MainActivity.ourApplication, HSRepo.provideHSRepoApi())
 
-
-        Log.i("arg", "${args.hsClass}")
         args.hsClass?.let {
             viewModel.getCardsByClass(it)
             binding.textSearch.visibility = View.GONE
@@ -59,7 +57,7 @@ class SearchPageFragment : Fragment() {
             binding.backToHome.visibility = View.VISIBLE
             binding.className.text = it
         }
-        Log.i("arg2", "${args.hsName}")
+
         args.hsName?.let {
             viewModel.getCardsByName(it)
             binding.textSearch.visibility = View.VISIBLE
@@ -67,20 +65,19 @@ class SearchPageFragment : Fragment() {
             binding.btnSearchSP.visibility = View.VISIBLE
             binding.className.visibility = View.GONE
             binding.backToHome.visibility = View.GONE
-            binding.textSearch.text = "Search results for '$it'"
+            val nameCard = "Search results for '$it'"
+            binding.textSearch.text = nameCard
         }
 
         viewModel.cards.observe(viewLifecycleOwner) { list ->
             binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
-            Log.d("Clau", "${list?.size}")
         }
 
         viewModel.cardsName.observe(viewLifecycleOwner) { list ->
             binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
-            Log.d("Clau", "${list?.size}")
 
             if (viewModel.cardsName.value.isNullOrEmpty()) {
-                val fragmentManager = (context as FragmentActivity).supportFragmentManager
+                val fragmentManager = FragmentComponentManager.findActivity(view.context)
                 ErrorCardName().show(fragmentManager, ErrorCardName::class.java.name)
             }
         }
@@ -103,13 +100,14 @@ class SearchPageFragment : Fragment() {
         return isValid
     }
 
-    @SuppressLint("SetTextI18n")
+
     private fun buttonSearch() {
-        binding.btnSearchSP.setOnClickListener { v: View ->
+        binding.btnSearchSP.setOnClickListener {
             if (validateSearch()) {
                 val nameCard = binding.searchViewSP.query.toString()
+                val textSearch = "Search results for '$nameCard'"
                 viewModel.getCardsByName(nameCard)
-                binding.textSearch.text = "Search results for '$nameCard'"
+                binding.textSearch.text = textSearch
             }
         }
     }

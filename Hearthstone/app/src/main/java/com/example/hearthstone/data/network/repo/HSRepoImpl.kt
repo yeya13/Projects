@@ -10,9 +10,6 @@ import javax.inject.Inject
 
 
 class HSRepoImpl @Inject constructor(private val api: HearthstoneApi,  private val dispatcher: Dispatchers) : HSRepo {
-   /* private val singletonRetrofit = SingletonRetrofit.retrofitProvider(
-        serviceClass = HearthstoneApi::class.java,
-        baseUrl = "https://omgvamp-hearthstone-v1.p.rapidapi.com/")*/
 
     override suspend fun getCards(): HearthstoneModel? {
         return withContext(dispatcher.IO) {

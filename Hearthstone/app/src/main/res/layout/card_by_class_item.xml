@@ -14,8 +14,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#80FFFFFF"
-        android:layout_marginBottom="16dp">
+        app:cardBackgroundColor="@color/white_low"
+        android:layout_marginBottom="@dimen/margin_16">
 
 
         <RelativeLayout
@@ -27,8 +27,8 @@
                 android:layout_width="86.3dp"
                 android:layout_height="86.8dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginTop="@dimen/margin_6"
+                android:layout_marginBottom="@dimen/margin_6"
                 tools:srcCompat="@drawable/photo_copy_2" />
 
             <TextView
@@ -37,12 +37,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/imageCard"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="13dp"
+                android:layout_marginStart="@dimen/margin_13"
                 android:layout_toEndOf="@+id/imageCard"
                 android:fontFamily="@font/montserrat_bold"
                 android:letterSpacing="-0.02"
-                android:textColor="#3b1718"
-                android:textSize="13sp"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
                 android:text="@{cardModel.name}"
                 tools:text="Name" />
 
@@ -52,13 +52,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_name"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="@dimen/margin_30"
                 android:layout_toEndOf="@+id/imageCard"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/margin_3"
                 android:fontFamily="@font/montserrat_regular"
                 android:letterSpacing="-0.02"
-                android:textColor="#3b1718"
-                android:textSize="13sp"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
                 android:textStyle="normal"
                 android:text="@{cardModel.type}"
                 tools:text="Type" />
@@ -69,13 +69,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_type"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_3"
                 android:layout_toEndOf="@+id/imageCard"
                 android:fontFamily="@font/montserrat_regular"
                 android:letterSpacing="-0.02"
-                android:textColor="#3b1718"
-                android:textSize="13sp"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
                 android:textStyle="normal"
                 android:text="@{cardModel.rarity}"
                 tools:text="Quality" />
@@ -86,13 +86,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/imageCard"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="@dimen/margin_30"
                 android:layout_below="@+id/text_quality"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/margin_3"
                 android:fontFamily="@font/montserrat_regular"
                 android:textStyle="normal"
-                android:textSize="13sp"
-                android:textColor="#3b1718"
+                android:textSize="@dimen/size_13"
+                android:textColor="@color/brown"
                 android:letterSpacing="-0.02"
                 android:text="@{cardModel.cardSet}"
                 tools:text="Set" />
@@ -103,8 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_20"
                 android:button="@drawable/selector_favlist_item"
                 app:useMaterialThemeColors="false" />
         </RelativeLayout>

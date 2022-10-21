@@ -25,7 +25,6 @@ class HomeViewModel @Inject constructor (app: Application, private val repo: HSR
     private fun getCardsByClass(){
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCards()
-            Log.d("Angie", "$cardsFetched")
             _cards.postValue(cardsFetched?.classes)
         }
     }

@@ -28,7 +28,6 @@ class SearchPageViewModel @Inject constructor(app: Application, private val repo
     fun getCardsByClass(className: String) {
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByClass(className)
-            Log.d("Cards", "$cardsFetched")
             _cards.postValue(cardsFetched)
         }
     }
@@ -36,7 +35,6 @@ class SearchPageViewModel @Inject constructor(app: Application, private val repo
     fun getCardsByName(cardName: String){
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByName(cardName)
-            Log.d("Angie", "$cardsFetched")
             _cardsName.postValue(cardsFetched)
         }
     }
