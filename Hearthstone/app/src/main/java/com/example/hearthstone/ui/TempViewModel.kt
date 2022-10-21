@@ -7,9 +7,4 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class TempViewModel @Inject constructor(repo: HSRepo): ViewModel() {
-
-    fun timberTime() {
-        Timber.d("Zelda our function was called through DI")
-    }
-}
+class TempViewModel @Inject constructor(repo: HSRepo): ViewModel()

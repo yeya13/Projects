@@ -1,9 +1,6 @@
 package com.example.hearthstone.ui.searchpage
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +11,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.hearthstone.MainActivity
 import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthStoneAdapterSP
-import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 @AndroidEntryPoint
 class SearchPageFragment : Fragment() {
@@ -77,7 +71,7 @@ class SearchPageFragment : Fragment() {
             binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
 
             if (viewModel.cardsName.value.isNullOrEmpty()) {
-                val fragmentManager = FragmentComponentManager.findActivity(view.context)
+                val fragmentManager = (activity as FragmentActivity).supportFragmentManager
                 ErrorCardName().show(fragmentManager, ErrorCardName::class.java.name)
             }
         }
