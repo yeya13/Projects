@@ -24,7 +24,6 @@ class SearchPageViewModel(app: Application, private val repo: HSRepo) :
     fun getCardsByClass(className: String) {
         viewModelScope.launch {
             val cardsFetched = repo.getCardsByClass(className)
-            Log.d("Cards", "$cardsFetched")
             _cards.postValue(cardsFetched)
         }
     }
@@ -32,7 +31,6 @@ class SearchPageViewModel(app: Application, private val repo: HSRepo) :
     fun getCardsByName(cardName: String){
         viewModelScope.launch {
             val cardsFetched = repo.getCardsByName(cardName)
-            Log.d("Angie", "$cardsFetched")
             _cardsName.postValue(cardsFetched)
         }
     }
