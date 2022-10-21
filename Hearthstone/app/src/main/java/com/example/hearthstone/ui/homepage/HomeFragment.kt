@@ -14,8 +14,7 @@ import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthstoneAdapter
 import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.databinding.FragmentHomeBinding
-import dagger.hilt.EntryPoint
-import dagger.hilt.android.AndroidEntryPoint
+
 
 class HomeFragment : Fragment() {
 
