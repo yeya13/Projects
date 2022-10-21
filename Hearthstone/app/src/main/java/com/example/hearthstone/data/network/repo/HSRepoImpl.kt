@@ -6,10 +6,10 @@ import com.example.hearthstone.data.network.api.HearthstoneApi
 import com.example.hearthstone.data.network.retrofit.SingletonRetrofit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-
-class HSRepoImpl @Inject constructor(private val api: HearthstoneApi,  private val dispatcher: Dispatchers) : HSRepo {
+class HSRepoImpl @Inject constructor(private val api: HearthstoneApi, private val dispatcher: Dispatchers) : HSRepo {
 
     override suspend fun getCards(): HearthstoneModel? {
         return withContext(dispatcher.IO) {

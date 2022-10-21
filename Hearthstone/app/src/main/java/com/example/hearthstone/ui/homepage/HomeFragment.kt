@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.example.hearthstone.MainActivity
 import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthstoneAdapter
-import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
