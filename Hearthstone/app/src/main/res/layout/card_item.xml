@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/card_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_71"
+        android:layout_marginTop="@dimen/margin_17"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_image"
+        android:layout_marginTop="@dimen/margin_3"
+        android:shadowColor="@color/shadow_black"
+        android:shadowDx="0"
+        android:shadowDy="6"
+        android:shadowRadius="12"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textSize="@dimen/size_10"
+        android:textColor="@color/yellow_letters"
+        android:letterSpacing="-0.02"
+        android:gravity="center_horizontal"
+        tools:text="Title card"
+        tools:ignore="SmallSp" />
+</LinearLayout>
