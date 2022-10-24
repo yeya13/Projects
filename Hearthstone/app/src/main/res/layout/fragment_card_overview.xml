@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -26,7 +25,7 @@
             android:id="@+id/cardName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_31"
+            android:layout_marginTop="@dimen/margin_45"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
@@ -38,7 +37,7 @@
             tools:text="Mana Bind" />
 
         <ImageView
-            android:id="@+id/backToHome"
+            android:id="@+id/backToSearchPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
@@ -77,20 +76,23 @@
         <ImageView
             android:id="@+id/cardImage"
             android:layout_width="match_parent"
-            android:layout_height="274dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            android:layout_height="@dimen/height_0"
+            android:layout_marginStart="@dimen/margin_50"
+            android:layout_marginEnd="@dimen/margin_50"
+            android:layout_marginBottom="@dimen/margin_20"
             android:src="@drawable/photo_copy_2"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icon" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
-            app:cardBackgroundColor="@color/yellow_letters"
-            app:layout_constraintTop_toBottomOf="@+id/cardImage">
+            android:layout_marginBottom="@dimen/margin_140"
+            app:cardBackgroundColor="@color/cyan"
+            app:layout_constraintBottom_toBottomOf="@+id/particles_blue">
 
             <RelativeLayout
                 android:layout_width="match_parent"

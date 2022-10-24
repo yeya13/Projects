@@ -32,4 +32,7 @@
     <dimen name="margin_9">9dp</dimen>
     <dimen name="margin_10">10dp</dimen>
     <dimen name="size_14_5">14.5sp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="height_0">0dp</dimen>
+    <dimen name="margin_140">140dp</dimen>
 </resources>
