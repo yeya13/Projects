@@ -1,11 +1,12 @@
 package com.example.hearthstone.data.network.repo
 
+import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.data.model.HearthstoneModel
 import com.example.hearthstone.data.network.api.HearthstoneApi
 import com.example.hearthstone.data.network.retrofit.SingletonRetrofit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
+
 
 class HSRepoImpl : HSRepo {
     private val singletonRetrofit = SingletonRetrofit.retrofitProvider(
@@ -16,6 +17,22 @@ class HSRepoImpl : HSRepo {
         return withContext(Dispatchers.IO) {
             val apiHSApi = singletonRetrofit
             val response = apiHSApi.getCards()
+            response.body()
+        }
+    }
+
+    override suspend fun getCardsByClass(className: String): List<HSCardsByClassModel>? {
+        return withContext(Dispatchers.IO){
+            val apiHSApi = singletonRetrofit
+            val response = apiHSApi.getCardsByClass(className = className)
+            response.body()
+        }
+    }
+
+    override suspend fun getCardsByName(cardName: String): List<HSCardsByClassModel>? {
+        return withContext(Dispatchers.IO){
+            val apiHSApi = singletonRetrofit
+            val response = apiHSApi.getCardsByName(cardName = cardName)
             response.body()
         }
     }

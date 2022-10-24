@@ -3,15 +3,17 @@ package com.example.hearthstone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.R
 import com.example.hearthstone.databinding.CardItemBinding
+import com.example.hearthstone.ui.homepage.HomeFragmentDirections
 
 class HearthstoneAdapter(private var cards: List<String>) :
     RecyclerView.Adapter<HearthstoneAdapter.HearthstoneViewHolder>(){
 
     inner class HearthstoneViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var binding = CardItemBinding.bind(view)
+        private var binding = CardItemBinding.bind(view)
 
         fun bindCard(card: String){
             when(card){
@@ -58,6 +60,10 @@ class HearthstoneAdapter(private var cards: List<String>) :
                 binding.txt.text = card
                 binding.cardImage.setImageResource(R.drawable.photo_copy_2)
                 }
+            }
+            binding.cardImage.setOnClickListener{v: View ->
+                val action = HomeFragmentDirections.actionHomeFragmentToSearchPageFragment(card)
+                v.findNavController().navigate(action)
             }
         }
     }

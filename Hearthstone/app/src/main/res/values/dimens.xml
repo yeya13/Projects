@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Margins -->
+    <dimen name="margin_31">31dp</dimen>
+    <dimen name="dimen_67">67dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
+    <dimen name="margin_13">13dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_23">23dp</dimen>
     <dimen name="margin_36">36dp</dimen>
     <dimen name="margin_98">98dp</dimen>
@@ -14,7 +20,12 @@
 
     <!--Size -->
     <dimen name="size_10">10sp</dimen>
+    <dimen name="size_13">13sp</dimen>
+    <dimen name="size_18">18sp</dimen>
+    <dimen name="size_15">15sp</dimen>
 
     <!--Height -->
     <dimen name="height_71">71dp</dimen>
+    <dimen name="width_86_3">86.3dp</dimen>
+    <dimen name="height_86_8">86.8dp</dimen>
 </resources>
