@@ -12,4 +12,6 @@
     <color name="brown">#3b1718</color>
     <color name="shadow_black">#80000000</color>
     <color name="yellow_letters">#fbcd1f</color>
+    <color name="cyan">#50d398</color>
+
 </resources>
