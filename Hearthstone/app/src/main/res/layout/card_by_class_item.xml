@@ -17,18 +17,18 @@
         app:cardBackgroundColor="@color/white_low"
         android:layout_marginBottom="@dimen/margin_16">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageCard"
-                android:layout_width="86.3dp"
-                android:layout_height="86.8dp"
+                android:layout_width="@dimen/width_86_3"
+                android:layout_height="@dimen/height_86_8"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/margin_6"
                 android:layout_marginBottom="@dimen/margin_6"
+                android:glide="@{cardModel.img}"
                 tools:srcCompat="@drawable/photo_copy_2" />
 
             <TextView

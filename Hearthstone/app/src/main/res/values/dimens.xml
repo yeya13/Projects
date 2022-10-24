@@ -26,4 +26,6 @@
 
     <!--Height -->
     <dimen name="height_71">71dp</dimen>
+    <dimen name="width_86_3">86.3dp</dimen>
+    <dimen name="height_86_8">86.8dp</dimen>
 </resources>
