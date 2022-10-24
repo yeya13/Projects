@@ -14,7 +14,6 @@ class HearthStoneAdapterSP(private var cards: List<HSCardsByClassModel>) :
     RecyclerView.Adapter<HearthStoneAdapterSP.HearthstoneViewHolder>() {
     inner class HearthstoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var binding = CardByClassItemBinding.bind(view)
-        var context = view.context
 
         fun bindCardByClass(card: HSCardsByClassModel) {
             binding.cardModel = card
