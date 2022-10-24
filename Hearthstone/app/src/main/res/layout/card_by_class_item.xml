@@ -17,7 +17,6 @@
         app:cardBackgroundColor="@color/white_low"
         android:layout_marginBottom="@dimen/margin_16">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -29,6 +28,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/margin_6"
                 android:layout_marginBottom="@dimen/margin_6"
+                android:glide="@{cardModel.img}"
                 tools:srcCompat="@drawable/photo_copy_2" />
 
             <TextView
