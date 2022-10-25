@@ -4,6 +4,7 @@ package com.example.hearthstone.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hearthstone.R
@@ -17,6 +18,10 @@ class HearthStoneAdapterSP(private var cards: List<HSCardsByClassModel>) :
 
         fun bindCardByClass(card: HSCardsByClassModel) {
             binding.cardModel = card
+
+            binding.cardViewByClass.setOnClickListener{ v: View ->
+                v.findNavController().navigate(R.id.action_searchPageFragment_to_cardOverviewFragment)
+            }
         }
     }
 

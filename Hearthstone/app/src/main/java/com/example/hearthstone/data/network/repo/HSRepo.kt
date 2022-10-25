@@ -10,4 +10,6 @@ interface HSRepo {
 
     suspend fun getCardsByName(cardName: String): List<HSCardsByClassModel>?
 
+    suspend fun getSingleCard(cardName: String): List<HSCardsByClassModel>?
+
 }
