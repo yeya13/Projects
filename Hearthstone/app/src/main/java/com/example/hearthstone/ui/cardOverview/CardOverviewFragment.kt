@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentCardOverviewBinding
+import com.example.hearthstone.ui.homepage.HomeFragmentDirections
 import com.example.hearthstone.ui.searchpage.SearchPageFragmentArgs
 import com.example.hearthstone.ui.searchpage.SearchPageViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,7 @@ class CardOverviewFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        goSearchPage()
 
         args.hsCard?.let {
             val hsCard = it.copy(
@@ -65,6 +68,14 @@ class CardOverviewFragment() : Fragment() {
                 }
             )
            binding.cardModel = hsCard
+        }
+    }
+
+    private fun goSearchPage() {
+        binding.backToSearchPage.setOnClickListener { v: View ->
+            val cardName = binding.cardName.text.toString()
+            val action = CardOverviewFragmentDirections.actionCardOverviewFragmentToSearchPageFragment(cardName)
+            v.findNavController().navigate(action)
         }
     }
 }

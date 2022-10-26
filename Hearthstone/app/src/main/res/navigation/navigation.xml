@@ -61,5 +61,12 @@
             android:name="hsCard"
             app:argType="com.example.hearthstone.data.model.HSCardsByClassModel"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_cardOverviewFragment_to_searchPageFragment"
+            app:destination="@id/searchPageFragment">
+        <argument
+            android:name="hsName"
+            app:argType="string"/>
+        </action>
     </fragment>
 </navigation>
