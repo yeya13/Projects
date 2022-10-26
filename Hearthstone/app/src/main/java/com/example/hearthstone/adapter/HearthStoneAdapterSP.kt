@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.CardByClassItemBinding
+import com.example.hearthstone.ui.homepage.HomeFragmentDirections
+import com.example.hearthstone.ui.searchpage.SearchPageFragment
+import com.example.hearthstone.ui.searchpage.SearchPageFragmentDirections
 
 class HearthStoneAdapterSP(private var cards: List<HSCardsByClassModel>) :
     RecyclerView.Adapter<HearthStoneAdapterSP.HearthstoneViewHolder>() {
@@ -19,8 +22,10 @@ class HearthStoneAdapterSP(private var cards: List<HSCardsByClassModel>) :
         fun bindCardByClass(card: HSCardsByClassModel) {
             binding.cardModel = card
 
-            binding.cardViewByClass.setOnClickListener{ v: View ->
-                v.findNavController().navigate(R.id.action_searchPageFragment_to_cardOverviewFragment)
+            binding.cardViewByClass.setOnClickListener { v: View ->
+                val action =
+                    SearchPageFragmentDirections.actionSearchPageFragmentToCardOverviewFragment(card)
+                v.findNavController().navigate(action)
             }
         }
     }

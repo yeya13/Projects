@@ -17,5 +17,7 @@ data class HSCardsByClassModel(
     @SerializedName("img")
     var img: String?,
     @SerializedName("text")
-    var text: String?
+    var text: String?,
+    @SerializedName("playerClass")
+    var playerClass: String?
     ) : Parcelable

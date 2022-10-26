@@ -28,11 +28,4 @@ interface HearthstoneApi {
         @Header("X-RapidAPI-Host") apiHost: String = "omgvamp-hearthstone-v1.p.rapidapi.com",
         @Path("name") cardName: String
     ): Response<List<HSCardsByClassModel>>
-
-    @GET("cards/{name}")
-    suspend fun getSingleCard(
-        @Header("X-RapidAPI-Key") apiKey: String = "d076ef0d6emsh14986fa05e38ffdp1ea135jsn1e4319697846",
-        @Header("X-RapidAPI-Host") apiHost: String = "omgvamp-hearthstone-v1.p.rapidapi.com",
-        @Path("name") cardName: String
-    ): Response<List<HSCardsByClassModel>>
 }

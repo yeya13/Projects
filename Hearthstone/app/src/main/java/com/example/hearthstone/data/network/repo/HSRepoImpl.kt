@@ -34,12 +34,4 @@ class HSRepoImpl @Inject constructor(private val api: HearthstoneApi, private va
             response.body()
         }
     }
-
-    override suspend fun getSingleCard(cardName: String): List<HSCardsByClassModel>? {
-        return withContext(Dispatchers.IO){
-            val apiHSApi = api
-            val response = apiHSApi.getSingleCard(cardName = cardName)
-            response.body()
-        }
-    }
 }

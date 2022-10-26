@@ -21,18 +21,8 @@ class CardOverviewViewModel @Inject constructor(
     private val dispatcher: Dispatchers
 ) :
     AndroidViewModel(app) {
-    private val _cardName = MutableLiveData<List<HSCardsByClassModel>?>()
-    val cardName: LiveData<List<HSCardsByClassModel>?> = _cardName
+    private val _cardName = MutableLiveData<HSCardsByClassModel>()
+    var cardName: LiveData<HSCardsByClassModel> = _cardName
 
-    //This init is a test to verify that the call works
-    init {
-        getSingleCard("Mana Bind")
-    }
 
-    private fun getSingleCard(cardName: String){
-        viewModelScope.launch(dispatcher.IO) {
-            val cardsFetched = repo.getSingleCard(cardName)
-            _cardName.postValue(cardsFetched)
-        }
-    }
 }
