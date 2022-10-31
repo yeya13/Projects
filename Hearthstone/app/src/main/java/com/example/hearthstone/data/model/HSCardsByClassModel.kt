@@ -6,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class HSCardsByClassModel(
+    @SerializedName("cardId")
+    var cardId: String,
     @SerializedName("name")
     var name: String?,
     @SerializedName("type")

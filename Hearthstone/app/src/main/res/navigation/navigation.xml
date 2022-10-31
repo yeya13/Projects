@@ -22,7 +22,7 @@
             app:destination="@id/searchPageFragment">
             <argument
                 android:name="hsName"
-                app:argType="string"/>
+                app:argType="string" />
         </action>
     </fragment>
 
@@ -43,13 +43,15 @@
             app:argType="string"/>
         <action
             android:id="@+id/action_searchPageFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_searchPageFragment_to_cardOverviewFragment"
             app:destination="@id/cardOverviewFragment">
             <argument
                 android:name="hsCard"
-                app:argType="com.example.hearthstone.data.model.HSCardsByClassModel"/>
+                app:argType="com.example.hearthstone.data.model.HSCardsByClassModel" />
         </action>
     </fragment>
 
@@ -61,12 +63,9 @@
             android:name="hsCard"
             app:argType="com.example.hearthstone.data.model.HSCardsByClassModel"
             app:nullable="true" />
+
         <action
-            android:id="@+id/action_cardOverviewFragment_to_searchPageFragment"
-            app:destination="@id/searchPageFragment">
-        <argument
-            android:name="hsName"
-            app:argType="string"/>
-        </action>
+            android:id="@+id/action_cardOverviewFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

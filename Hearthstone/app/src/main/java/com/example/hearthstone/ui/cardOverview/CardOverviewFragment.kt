@@ -1,47 +1,49 @@
 package com.example.hearthstone.ui.cardOverview
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hearthstone.R
-import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentCardOverviewBinding
-import com.example.hearthstone.ui.homepage.HomeFragmentDirections
-import com.example.hearthstone.ui.searchpage.SearchPageFragmentArgs
-import com.example.hearthstone.ui.searchpage.SearchPageViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CardOverviewFragment() : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
     private val viewModel: CardOverviewViewModel by viewModels()
     private val args: CardOverviewFragmentArgs by navArgs()
+    private lateinit var hsCard: HSCardsByClassModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_card_overview, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_card_overview, container, false)
+        viewModel.getAllCards()
+        checkFavorite()
+        goSearchPage()
+
+        viewModel.fav.observe(viewLifecycleOwner) {
+            binding.icon.isChecked = it
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        goSearchPage()
-
         args.hsCard?.let {
-            val hsCard = it.copy(
+            hsCard = it.copy(
                 text = it.text?.let { text ->
                     HtmlCompat.fromHtml(
                         "<b>Effect: </b>$text",
@@ -67,15 +69,27 @@ class CardOverviewFragment() : Fragment() {
                     ).toString()
                 }
             )
-           binding.cardModel = hsCard
+            binding.cardModel = hsCard
+
         }
+        viewModel.queryCard(hsCard)
     }
 
     private fun goSearchPage() {
         binding.backToSearchPage.setOnClickListener { v: View ->
-            val cardName = binding.cardName.text.toString()
-            val action = CardOverviewFragmentDirections.actionCardOverviewFragmentToSearchPageFragment(cardName)
-            v.findNavController().navigate(action)
+            v.findNavController().navigate(R.id.action_cardOverviewFragment_to_homeFragment2)
+        }
+    }
+
+    private fun checkFavorite() {
+        binding.icon.setOnClickListener {
+            if (binding.icon.isChecked) {
+                viewModel.insertCard()
+                Toast.makeText(context, "Added to favorite list", Toast.LENGTH_LONG).show()
+            } else {
+                viewModel.deleteUser()
+                Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
