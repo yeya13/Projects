@@ -1,4 +1,4 @@
-package com.example.hearthstone.ui
+package com.example.hearthstone.ui.favoritepage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
