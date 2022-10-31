@@ -35,4 +35,7 @@
     <dimen name="margin_50">50dp</dimen>
     <dimen name="height_0">0dp</dimen>
     <dimen name="margin_140">140dp</dimen>
+    <dimen name="margin_41">41dp</dimen>
+    <dimen name="margin_47">47dp</dimen>
+    <dimen name="margin_100">100dp</dimen>
 </resources>

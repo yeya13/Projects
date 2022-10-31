@@ -77,9 +77,9 @@
             android:id="@+id/cardImage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_0"
-            android:layout_marginStart="@dimen/margin_50"
-            android:layout_marginEnd="@dimen/margin_50"
-            android:layout_marginBottom="@dimen/margin_20"
+            android:layout_marginStart="@dimen/margin_41"
+            android:layout_marginEnd="@dimen/margin_41"
+            android:layout_marginBottom="@dimen/margin_47"
             android:src="@drawable/photo_copy_2"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,13 +90,14 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_140"
+            android:layout_marginBottom="@dimen/margin_100"
             app:cardBackgroundColor="@color/cyan"
             app:layout_constraintBottom_toBottomOf="@+id/particles_blue">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/type"
@@ -157,7 +158,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14_5"
                     tools:text="Effect: Secret: when your opponent casts a spell, add a copy to your hand that costs (0)." />
-            </RelativeLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

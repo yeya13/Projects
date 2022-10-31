@@ -13,11 +13,6 @@ import com.example.hearthstone.databinding.FragmentCardOverviewBinding
 class CardOverviewFragment : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
