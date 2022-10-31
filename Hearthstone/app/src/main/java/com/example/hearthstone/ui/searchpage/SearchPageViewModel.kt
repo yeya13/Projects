@@ -9,9 +9,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.data.network.repo.HSRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchPageViewModel(app: Application, private val repo: HSRepo) :
+@HiltViewModel
+class SearchPageViewModel @Inject constructor(app: Application, private val repo: HSRepo, private val dispatcher: Dispatchers) :
     AndroidViewModel(app) {
     private val _cards = MutableLiveData<List<HSCardsByClassModel>?>()
     val cards: LiveData<List<HSCardsByClassModel>?> = _cards
@@ -22,14 +26,14 @@ class SearchPageViewModel(app: Application, private val repo: HSRepo) :
 
 
     fun getCardsByClass(className: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByClass(className)
             _cards.postValue(cardsFetched)
         }
     }
 
     fun getCardsByName(cardName: String){
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByName(cardName)
             _cardsName.postValue(cardsFetched)
         }

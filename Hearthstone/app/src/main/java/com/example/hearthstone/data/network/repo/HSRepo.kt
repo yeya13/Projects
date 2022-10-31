@@ -10,7 +10,4 @@ interface HSRepo {
 
     suspend fun getCardsByName(cardName: String): List<HSCardsByClassModel>?
 
-    companion object{
-        fun provideHSRepoApi() = HSRepoImpl()
-    }
 }

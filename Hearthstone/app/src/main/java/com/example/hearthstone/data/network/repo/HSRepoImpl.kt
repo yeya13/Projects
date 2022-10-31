@@ -6,16 +6,14 @@ import com.example.hearthstone.data.network.api.HearthstoneApi
 import com.example.hearthstone.data.network.retrofit.SingletonRetrofit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class HSRepoImpl : HSRepo {
-    private val singletonRetrofit = SingletonRetrofit.retrofitProvider(
-        serviceClass = HearthstoneApi::class.java,
-        baseUrl = "https://omgvamp-hearthstone-v1.p.rapidapi.com/")
+class HSRepoImpl @Inject constructor(private val api: HearthstoneApi, private val dispatcher: Dispatchers) : HSRepo {
 
     override suspend fun getCards(): HearthstoneModel? {
-        return withContext(Dispatchers.IO) {
-            val apiHSApi = singletonRetrofit
+        return withContext(dispatcher.IO) {
+            val apiHSApi = api
             val response = apiHSApi.getCards()
             response.body()
         }
@@ -23,7 +21,7 @@ class HSRepoImpl : HSRepo {
 
     override suspend fun getCardsByClass(className: String): List<HSCardsByClassModel>? {
         return withContext(Dispatchers.IO){
-            val apiHSApi = singletonRetrofit
+            val apiHSApi = api
             val response = apiHSApi.getCardsByClass(className = className)
             response.body()
         }
@@ -31,7 +29,7 @@ class HSRepoImpl : HSRepo {
 
     override suspend fun getCardsByName(cardName: String): List<HSCardsByClassModel>? {
         return withContext(Dispatchers.IO){
-            val apiHSApi = singletonRetrofit
+            val apiHSApi = api
             val response = apiHSApi.getCardsByName(cardName = cardName)
             response.body()
         }
