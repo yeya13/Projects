@@ -13,8 +13,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthStoneAdapterSP
+import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
+import com.example.hearthstone.ui.cardOverview.CardOverviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class SearchPageFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchPageBinding
     private val viewModel: SearchPageViewModel by viewModels()
+    private val viewModelOverview: CardOverviewViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
 
 
@@ -34,6 +37,7 @@ class SearchPageFragment : Fragment() {
             inflater, R.layout.fragment_search_page,
             container, false
         )
+        viewModelOverview.getAllCards()
         return binding.root
     }
 
@@ -63,12 +67,30 @@ class SearchPageFragment : Fragment() {
             binding.textSearch.text = nameCard
         }
 
+        viewModel.getAllID()
+
         viewModel.cards.observe(viewLifecycleOwner) { list ->
-            binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
+            binding.myRecyclerViewSP.adapter =
+                list?.let { it ->
+                    HearthStoneAdapterSP(
+                        it,
+                        viewModel.cardsID.value,
+                        this::insertCard,
+                        this::removeCard
+                    )
+                }
         }
 
         viewModel.cardsName.observe(viewLifecycleOwner) { list ->
-            binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
+            binding.myRecyclerViewSP.adapter =
+                list?.let { it ->
+                    HearthStoneAdapterSP(
+                        it,
+                        viewModel.cardsID.value,
+                        this::insertCard,
+                        this::removeCard
+                    )
+                }
 
             if (viewModel.cardsName.value.isNullOrEmpty()) {
                 val fragmentManager = (activity as FragmentActivity).supportFragmentManager
@@ -104,5 +126,13 @@ class SearchPageFragment : Fragment() {
                 binding.textSearch.text = textSearch
             }
         }
+    }
+
+    fun insertCard(hsCard: HSCardsByClassModel) {
+        viewModel.insertCard(hsCard)
+    }
+
+    fun removeCard(hsCard: HSCardsByClassModel) {
+        viewModel.deleteUser(hsCard)
     }
 }
