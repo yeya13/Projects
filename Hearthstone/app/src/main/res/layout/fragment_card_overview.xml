@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_100"
             app:cardBackgroundColor="@color/cyan"
-            app:layout_constraintBottom_toBottomOf="@+id/particles_blue">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
