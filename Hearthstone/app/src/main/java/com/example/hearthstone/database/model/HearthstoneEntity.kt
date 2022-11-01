@@ -14,5 +14,7 @@ data class HearthstoneEntity(
     var type: String?,
     var rarity: String?,
     var cardSet: String?,
-    var img: String?
+    var img: String?,
+    var text: String?,
+    var playerClass: String?
 ):Parcelable

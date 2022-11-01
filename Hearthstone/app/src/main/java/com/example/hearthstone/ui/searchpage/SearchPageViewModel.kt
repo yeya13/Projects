@@ -62,7 +62,9 @@ class SearchPageViewModel @Inject constructor(
             type = hs.type,
             rarity = hs.rarity,
             cardSet = hs.cardSet,
-            img = hs.img
+            img = hs.img,
+            text = hs.text,
+            playerClass = hs.playerClass
         )
     }
 

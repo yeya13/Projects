@@ -34,6 +34,11 @@ class HomeFragment : Fragment() {
 
         buttonSearch()
 
+        //This is only to open the favorite page, when I add the bottom navigation I will delete this
+        binding.logo.setOnClickListener{
+            it.findNavController().navigate(R.id.action_homeFragment_to_favoritesFragment)
+        }
+
         viewModel.cards.observe(viewLifecycleOwner) {
             binding.myRV.adapter = it?.let { cards -> HearthstoneAdapter(cards) }
         }
