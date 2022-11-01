@@ -16,7 +16,6 @@ import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
-import com.example.hearthstone.ui.cardOverview.CardOverviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +23,6 @@ class SearchPageFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchPageBinding
     private val viewModel: SearchPageViewModel by viewModels()
-    private val viewModelOverview: CardOverviewViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
 
 
@@ -37,7 +35,7 @@ class SearchPageFragment : Fragment() {
             inflater, R.layout.fragment_search_page,
             container, false
         )
-        viewModelOverview.getAllCards()
+       viewModel.getAllCards()
         return binding.root
     }
 
@@ -133,6 +131,6 @@ class SearchPageFragment : Fragment() {
     }
 
     fun removeCard(hsCard: HSCardsByClassModel) {
-        viewModel.deleteUser(hsCard)
+        viewModel.deleteCard(hsCard)
     }
 }
