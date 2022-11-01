@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/vfx_bg_blue"
+        tools:context=".ui.cardOverview.CardOverviewFragment">
+
+
+        <ImageView
+            android:id="@+id/particles_blue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/particles_blue" />
+
+        <TextView
+            android:id="@+id/cardName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_45"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_18"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mana Bind" />
+
+        <ImageView
+            android:id="@+id/backToSearchPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            app:layout_constraintBottom_toBottomOf="@+id/cardName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cardName"
+            app:srcCompat="@drawable/arrow_chevron_big_left" />
+
+        <TextView
+            android:id="@+id/className"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_9"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_horizontal"
+            android:textColor="@color/yellow_letters"
+            android:textSize="@dimen/size_18"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardName"
+            tools:text="Mage" />
+
+        <CheckBox
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:button="@drawable/selector_favlist_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/className"
+            app:useMaterialThemeColors="false" />
+
+        <ImageView
+            android:id="@+id/cardImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_0"
+            android:layout_marginStart="@dimen/margin_41"
+            android:layout_marginEnd="@dimen/margin_41"
+            android:layout_marginBottom="@dimen/margin_47"
+            android:src="@drawable/photo_copy_2"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_100"
+            app:cardBackgroundColor="@color/cyan"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:letterSpacing="0.01"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_14_5"
+                    tools:text="Type: Spell" />
+
+                <TextView
+                    android:id="@+id/rarity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/type"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:letterSpacing="0.01"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_14_5"
+                    tools:text="Rarity: Rare" />
+
+                <TextView
+                    android:id="@+id/set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rarity"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:letterSpacing="0.01"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_14_5"
+                    tools:text="Set: Journey to Un’Goro" />
+
+                <TextView
+                    android:id="@+id/effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/set"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:letterSpacing="0.01"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_14_5"
+                    tools:text="Effect: Secret: when your opponent casts a spell, add a copy to your hand that costs (0)." />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
