@@ -27,6 +27,7 @@ class FavoritesFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_favorites, container, false)
+        binding.frag = this
         viewModel.getAllCards()
 
         viewModel.cardList.observe(viewLifecycleOwner) { list ->
@@ -37,11 +38,11 @@ class FavoritesFragment : Fragment() {
                 )
             }
         }
-
-        binding.backToHome.setOnClickListener{v: View ->
-            v.findNavController().navigate(R.id.action_favoritesFragment_to_homeFragment)
-        }
         return binding.root
+    }
+
+    fun backToHome(v: View) {
+        v.findNavController().navigate(R.id.action_favoritesFragment_to_homeFragment)
     }
 
     private fun removeCard(hsCard: HearthstoneEntity) {
