@@ -9,5 +9,4 @@ interface HSRepo {
     suspend fun getCardsByClass(className: String): List<HSCardsByClassModel>?
 
     suspend fun getCardsByName(cardName: String): List<HSCardsByClassModel>?
-
 }

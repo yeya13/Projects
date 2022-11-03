@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="frag"
+            type="com.example.hearthstone.ui.favoritepage.FavoritesFragment" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/vfx_bg">
+
+        <ImageView
+            android:id="@+id/particles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/particles"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_your_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_31"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_horizontal"
+            android:text="Your favorites"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_18"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:onClick="@{(view)->frag.backToHome(view)}"
+            app:layout_constraintBottom_toBottomOf="@+id/text_your_favorites"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_your_favorites"
+            app:srcCompat="@drawable/arrow_chevron_big_left" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecyclerViewFav"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_0"
+            android:layout_marginTop="@dimen/margin_31"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_your_favorites"
+            tools:itemCount="4"
+            tools:listitem="@layout/card_by_class_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
