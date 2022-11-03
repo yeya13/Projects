@@ -25,7 +25,6 @@ class SearchPageFragment : Fragment() {
     private val viewModel: SearchPageViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,14 +34,13 @@ class SearchPageFragment : Fragment() {
             inflater, R.layout.fragment_search_page,
             container, false
         )
-       viewModel.getAllCards()
+        binding.frag = this
+        viewModel.getAllCards()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        goHome()
-        buttonSearch()
 
         args.hsClass?.let {
             viewModel.getCardsByClass(it)
@@ -97,10 +95,8 @@ class SearchPageFragment : Fragment() {
         }
     }
 
-    private fun goHome() {
-        binding.backToHome.setOnClickListener { v: View ->
-            v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
-        }
+    fun goHome(v: View) {
+        v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
     }
 
     private fun validateSearch(): Boolean {
@@ -114,15 +110,12 @@ class SearchPageFragment : Fragment() {
         return isValid
     }
 
-
-    private fun buttonSearch() {
-        binding.btnSearchSP.setOnClickListener {
-            if (validateSearch()) {
-                val nameCard = binding.searchViewSP.query.toString()
-                val textSearch = "Search results for '$nameCard'"
-                viewModel.getCardsByName(nameCard)
-                binding.textSearch.text = textSearch
-            }
+    fun buttonSearch() {
+        if (validateSearch()) {
+            val nameCard = binding.searchViewSP.query.toString()
+            val textSearch = "Search results for '$nameCard'"
+            viewModel.getCardsByName(nameCard)
+            binding.textSearch.text = textSearch
         }
     }
 
