@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="cardModel"
+            type="com.example.hearthstone.data.model.HSCardsByClassModel" />
+        <variable
+            name="frag"
+            type="com.example.hearthstone.ui.cardOverview.CardOverviewFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +36,7 @@
             android:gravity="center_horizontal"
             android:textColor="@color/white"
             android:textSize="@dimen/size_18"
+            android:text="@{cardModel.name}"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16"
+            android:onClick="@{(view)->frag.goSearchPage(view)}"
             app:layout_constraintBottom_toBottomOf="@+id/cardName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cardName"
@@ -56,6 +64,7 @@
             android:textColor="@color/yellow_letters"
             android:textSize="@dimen/size_18"
             android:textStyle="normal"
+            android:text="@{cardModel.playerClass}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardName"
@@ -68,6 +77,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/margin_16"
+            android:checked="false"
+            android:onClick="@{()-> frag.checkFavorite()}"
             android:button="@drawable/selector_favlist_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/className"
@@ -81,6 +92,7 @@
             android:layout_marginEnd="@dimen/margin_41"
             android:layout_marginBottom="@dimen/margin_47"
             android:src="@drawable/photo_copy_2"
+            android:glide="@{cardModel.img}"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +122,10 @@
                     android:layout_marginBottom="@dimen/margin_10"
                     android:fontFamily="@font/montserrat_bold"
                     android:letterSpacing="0.01"
+                    android:text="@{cardModel.type}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14_5"
+                    android:visibility="@{cardModel.type == null ?View.GONE: View.VISIBLE}"
                     tools:text="Type: Spell" />
 
                 <TextView
@@ -125,6 +139,8 @@
                     android:layout_marginBottom="@dimen/margin_10"
                     android:fontFamily="@font/montserrat_bold"
                     android:letterSpacing="0.01"
+                    android:visibility="@{cardModel.rarity == null ?View.GONE: View.VISIBLE}"
+                    android:text="@{cardModel.rarity}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14_5"
                     tools:text="Rarity: Rare" />
@@ -142,10 +158,13 @@
                     android:letterSpacing="0.01"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14_5"
+                    android:visibility="@{cardModel.cardSet == null ?View.GONE: View.VISIBLE}"
+                    android:text="@{cardModel.cardSet}"
                     tools:text="Set: Journey to Un’Goro" />
 
                 <TextView
                     android:id="@+id/effect"
+                    android:visibility="@{cardModel.text == null ?View.GONE: View.VISIBLE}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/set"
@@ -155,6 +174,7 @@
                     android:layout_marginBottom="@dimen/margin_10"
                     android:fontFamily="@font/montserrat_bold"
                     android:letterSpacing="0.01"
+                    android:text="@{cardModel.text}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size_14_5"
                     tools:text="Effect: Secret: when your opponent casts a spell, add a copy to your hand that costs (0)." />

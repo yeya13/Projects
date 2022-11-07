@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hearthstone.R
 import com.example.hearthstone.adapter.HearthStoneAdapterSP
+import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,6 @@ class SearchPageFragment : Fragment() {
     private val viewModel: SearchPageViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,13 +34,13 @@ class SearchPageFragment : Fragment() {
             inflater, R.layout.fragment_search_page,
             container, false
         )
+        binding.frag = this
+        viewModel.getAllCards()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        goHome()
-        buttonSearch()
 
         args.hsClass?.let {
             viewModel.getCardsByClass(it)
@@ -63,12 +63,30 @@ class SearchPageFragment : Fragment() {
             binding.textSearch.text = nameCard
         }
 
+        viewModel.getAllID()
+
         viewModel.cards.observe(viewLifecycleOwner) { list ->
-            binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
+            binding.myRecyclerViewSP.adapter =
+                list?.let { it ->
+                    HearthStoneAdapterSP(
+                        it,
+                        viewModel.cardsID.value,
+                        this::insertCard,
+                        this::removeCard
+                    )
+                }
         }
 
         viewModel.cardsName.observe(viewLifecycleOwner) { list ->
-            binding.myRecyclerViewSP.adapter = list?.let { it -> HearthStoneAdapterSP(it) }
+            binding.myRecyclerViewSP.adapter =
+                list?.let { it ->
+                    HearthStoneAdapterSP(
+                        it,
+                        viewModel.cardsID.value,
+                        this::insertCard,
+                        this::removeCard
+                    )
+                }
 
             if (viewModel.cardsName.value.isNullOrEmpty()) {
                 val fragmentManager = (activity as FragmentActivity).supportFragmentManager
@@ -77,10 +95,8 @@ class SearchPageFragment : Fragment() {
         }
     }
 
-    private fun goHome() {
-        binding.backToHome.setOnClickListener { v: View ->
-            v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
-        }
+    fun goHome(v: View) {
+        v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
     }
 
     private fun validateSearch(): Boolean {
@@ -94,15 +110,20 @@ class SearchPageFragment : Fragment() {
         return isValid
     }
 
-
-    private fun buttonSearch() {
-        binding.btnSearchSP.setOnClickListener {
-            if (validateSearch()) {
-                val nameCard = binding.searchViewSP.query.toString()
-                val textSearch = "Search results for '$nameCard'"
-                viewModel.getCardsByName(nameCard)
-                binding.textSearch.text = textSearch
-            }
+    fun buttonSearch() {
+        if (validateSearch()) {
+            val nameCard = binding.searchViewSP.query.toString()
+            val textSearch = "Search results for '$nameCard'"
+            viewModel.getCardsByName(nameCard)
+            binding.textSearch.text = textSearch
         }
+    }
+
+    fun insertCard(hsCard: HSCardsByClassModel) {
+        viewModel.insertCard(hsCard)
+    }
+
+    fun removeCard(hsCard: HSCardsByClassModel) {
+        viewModel.deleteCard(hsCard)
     }
 }

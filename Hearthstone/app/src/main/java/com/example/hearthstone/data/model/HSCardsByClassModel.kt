@@ -6,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class HSCardsByClassModel(
+    @SerializedName("cardId")
+    var cardId: String,
     @SerializedName("name")
     var name: String?,
     @SerializedName("type")
@@ -15,5 +17,9 @@ data class HSCardsByClassModel(
     @SerializedName("cardSet")
     var cardSet: String?,
     @SerializedName("img")
-    var img: String?
+    var img: String?,
+    @SerializedName("text")
+    var text: String?,
+    @SerializedName("playerClass")
+    var playerClass: String?
     ) : Parcelable
