@@ -16,7 +16,6 @@ import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
-import com.example.hearthstone.ui.cardOverview.CardOverviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +23,7 @@ class SearchPageFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchPageBinding
     private val viewModel: SearchPageViewModel by viewModels()
-    private val viewModelOverview: CardOverviewViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +34,13 @@ class SearchPageFragment : Fragment() {
             inflater, R.layout.fragment_search_page,
             container, false
         )
-        viewModelOverview.getAllCards()
+        binding.frag = this
+        viewModel.getAllCards()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        goHome()
-        buttonSearch()
 
         args.hsClass?.let {
             viewModel.getCardsByClass(it)
@@ -99,10 +95,8 @@ class SearchPageFragment : Fragment() {
         }
     }
 
-    private fun goHome() {
-        binding.backToHome.setOnClickListener { v: View ->
-            v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
-        }
+    fun goHome(v: View) {
+        v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
     }
 
     private fun validateSearch(): Boolean {
@@ -116,15 +110,12 @@ class SearchPageFragment : Fragment() {
         return isValid
     }
 
-
-    private fun buttonSearch() {
-        binding.btnSearchSP.setOnClickListener {
-            if (validateSearch()) {
-                val nameCard = binding.searchViewSP.query.toString()
-                val textSearch = "Search results for '$nameCard'"
-                viewModel.getCardsByName(nameCard)
-                binding.textSearch.text = textSearch
-            }
+    fun buttonSearch() {
+        if (validateSearch()) {
+            val nameCard = binding.searchViewSP.query.toString()
+            val textSearch = "Search results for '$nameCard'"
+            viewModel.getCardsByName(nameCard)
+            binding.textSearch.text = textSearch
         }
     }
 
@@ -133,6 +124,6 @@ class SearchPageFragment : Fragment() {
     }
 
     fun removeCard(hsCard: HSCardsByClassModel) {
-        viewModel.deleteUser(hsCard)
+        viewModel.deleteCard(hsCard)
     }
 }
