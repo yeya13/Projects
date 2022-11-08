@@ -46,9 +46,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
-
         ourApplication = this.application
     }
 
