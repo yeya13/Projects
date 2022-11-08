@@ -43,6 +43,7 @@ class CardOverviewFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         args.hsCard?.let {
             card = it.copy(
                 text = it.text?.let { text ->
@@ -78,7 +79,7 @@ class CardOverviewFragment() : Fragment() {
 
     private fun goSearchPage() {
         binding.backToSearchPage.setOnClickListener { v: View ->
-            v.findNavController().navigate(R.id.action_cardOverviewFragment_to_homeFragment)
+            v.findNavController().popBackStack()
         }
     }
 

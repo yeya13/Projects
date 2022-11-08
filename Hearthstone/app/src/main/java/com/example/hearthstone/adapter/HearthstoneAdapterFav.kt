@@ -8,10 +8,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
-import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.database.model.HearthstoneEntity
 import com.example.hearthstone.databinding.CardFavoriteItemBinding
-import com.example.hearthstone.ui.favoritepage.FavoritesFragmentDirections
 import com.example.hearthstone.ui.searchpage.SearchPageFragmentDirections
 import kotlin.reflect.KFunction0
 
@@ -48,14 +46,14 @@ class HearthstoneAdapterFav(
                 removeFunction.invoke(card)
             }
 
-            binding.cardViewFavorite.setOnClickListener { v: View ->
+            /*binding.cardViewFavorite.setOnClickListener { v: View ->
                 val obEntity = entityToModel()
                 val action =
                     FavoritesFragmentDirections.actionFavoritesFragmentToCardOverviewFragment(
                         obEntity
                     )
                 v.findNavController().navigate(action)
-            }
+            }*/
         }
 
     }

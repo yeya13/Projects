@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1395" />
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_baseline_favorite_filled_24.xml" value="0.1395" />
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1395" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_baseline_outline.xml" value="0.13" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_heart_filled.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/ic_heart_outline.xml" value="0.149" />
@@ -11,13 +14,15 @@
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/drawable/selector_favoritelist_item.xml" value="0.1" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/activity_main.xml" value="0.1718683197947841" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/card_by_class.xml" value="0.33" />
-        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/card_by_class_item.xml" value="0.1" />
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/card_by_class_item.xml" value="0.43148148148148147" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/card_favorite_item.xml" value="0.17101325352714836" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/card_item.xml" value="0.22" />
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/fragment_blank.xml" value="0.1718683197947841" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/fragment_card_overview.xml" value="0.21" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/fragment_favorites.xml" value="0.25" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/fragment_home.xml" value="0.1718683197947841" />
         <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/layout/fragment_search_page.xml" value="0.23780487804878048" />
+        <entry key="..\:/Users/admin/OneDrive/Escritorio/ProjectsBlueParrot/Hearthstone/app/src/main/res/menu/bottom_av.xml" value="0.1718683197947841" />
       </map>
     </option>
   </component>
