@@ -2,7 +2,6 @@ package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,6 +32,8 @@ class SearchPageViewModel @Inject constructor(
 
     private val _cardsName = MutableLiveData<List<HSCardsByClassModel>?>()
     val cardsName: LiveData<List<HSCardsByClassModel>?> = _cardsName
+
+    private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
 
     fun getCardsByClass(className: String) {
@@ -69,19 +70,32 @@ class SearchPageViewModel @Inject constructor(
     }
 
     fun insertCard(hs: HSCardsByClassModel){
-        val obFormEntity = getCardData(hs)
+        val obEntity = getCardData(hs)
         viewModelScope.launch {
             withContext(dispatcher.IO){
-                db.insertCard(obFormEntity)
+                db.insertCard(obEntity)
             }
         }
     }
 
-    fun deleteUser(hs: HSCardsByClassModel) {
-        val obFormEntity = getCardData(hs)
+    fun deleteCard(hs: HSCardsByClassModel) {
+        val obEntity = getCardData(hs)
         viewModelScope.launch {
             withContext(dispatcher.IO) {
-                db.removeCard(obFormEntity)
+                db.removeCard(obEntity)
+            }
+        }
+    }
+
+    fun getAllCards(){
+        viewModelScope.launch {
+            cardList.value = withContext(dispatcher.IO){
+                db.getAll()
+            }
+            cardList.value?.let {
+                for (HSEntity in it){
+                    Log.d("mensaje", "id: ${HSEntity.id}, nombre: ${HSEntity.name}, tel: ${HSEntity.type}")
+                }
             }
         }
     }

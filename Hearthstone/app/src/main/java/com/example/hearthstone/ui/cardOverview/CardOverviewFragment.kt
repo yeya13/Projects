@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CardOverviewFragment() : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
-
     private val viewModel: CardOverviewViewModel by viewModels()
     private val args: CardOverviewFragmentArgs by navArgs()
     private lateinit var card: HSCardsByClassModel
@@ -31,9 +30,8 @@ class CardOverviewFragment() : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_card_overview, container, false)
+        binding.frag = this
         viewModel.getAllCards()
-        checkFavorite()
-        goSearchPage()
 
         viewModel.fav.observe(viewLifecycleOwner) {
             binding.icon.isChecked = it
@@ -77,21 +75,17 @@ class CardOverviewFragment() : Fragment() {
         args.hsCard?.let { viewModel.queryCard(it) }
     }
 
-    private fun goSearchPage() {
-        binding.backToSearchPage.setOnClickListener { v: View ->
-            v.findNavController().popBackStack()
-        }
+    fun goSearchPage(v: View) {
+        v.findNavController().popBackStack()
     }
 
-    private fun checkFavorite() {
-        binding.icon.setOnClickListener {
-            if (binding.icon.isChecked) {
-                viewModel.insertCard()
-                Toast.makeText(context, "Added to favorite list", Toast.LENGTH_LONG).show()
-            } else {
-                viewModel.deleteUser()
-                Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_LONG).show()
-            }
+    fun checkFavorite() {
+        if (binding.icon.isChecked) {
+            viewModel.insertCard()
+            Toast.makeText(context, "Added to favorite list", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.deleteUser()
+            Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_SHORT).show()
         }
     }
 }

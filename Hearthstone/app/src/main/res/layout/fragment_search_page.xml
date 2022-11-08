@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="frag"
+            type="com.example.hearthstone.ui.searchpage.SearchPageFragment" />
     </data>
 
     <LinearLayout
@@ -40,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
                 android:visibility="gone"
+                android:onClick="@{(view)->frag.goHome(view)}"
                 app:layout_constraintBottom_toBottomOf="@+id/className"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/className"
@@ -85,6 +89,7 @@
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:letterSpacing="-0.02"
                 android:text="@string/search"
+                android:onClick="@{()->frag.buttonSearch()}"
                 android:textColor="@color/yellow_low"
                 android:textSize="@dimen/size_15"
                 android:visibility="visible"
