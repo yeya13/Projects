@@ -33,18 +33,6 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.hearthstone.ui.favoritepage.FavoritesFragment"
         android:label="FavoritesFragment">
-        <!--<action
-            android:id="@+id/action_favoritesFragment_to_cardOverviewFragment"
-            app:destination="@id/cardOverviewFragment">
-            <argument
-                android:name="hsCard"
-                app:argType="com.example.hearthstone.data.model.HSCardsByClassModel" />
-        </action>
-        <action
-            android:id="@+id/action_favoritesFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />-->
     </fragment>
 
     <fragment
@@ -91,4 +79,9 @@
             app:popUpToInclusive="true"
             app:restoreState="true" />
     </fragment>
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.hearthstone.ui.shopPage.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_map" />
 </navigation>
