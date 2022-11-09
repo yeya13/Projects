@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Main"
+        android:id="@+id/bottom_av_homeFragment"
+        android:icon="@drawable/ic_baseline_tag_faces_24"/>
+
+    <item android:title="Favorites"
+        android:id="@+id/bottom_av_favoritesFragment"
+        android:icon="@drawable/ic_baseline_favorite_border_24"/>
+
+    <item android:title="Shops"
+        android:id="@+id/bottom_av_shopFragment"
+        android:icon="@drawable/ic_baseline_location_on_24"/>
+</menu>
