@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="carddModel"
+            type="com.example.hearthstone.database.model.HearthstoneEntity" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white_low"
+        android:layout_marginBottom="@dimen/margin_16">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageCard"
+                android:layout_width="@dimen/width_86_3"
+                android:layout_height="@dimen/height_86_8"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/margin_6"
+                android:glide="@{carddModel.img}"
+                android:layout_marginBottom="@dimen/margin_6"
+                tools:srcCompat="@drawable/photo_copy_2" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageCard"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_13"
+                android:layout_toEndOf="@+id/imageCard"
+                android:fontFamily="@font/montserrat_bold"
+                android:letterSpacing="-0.02"
+                android:text="@{carddModel.name}"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/text_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_name"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_toEndOf="@+id/imageCard"
+                android:layout_marginTop="@dimen/margin_3"
+                android:fontFamily="@font/montserrat_regular"
+                android:letterSpacing="-0.02"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
+                android:text="@{carddModel.type}"
+                android:textStyle="normal"
+                tools:text="Type" />
+
+            <TextView
+                android:id="@+id/text_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_type"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_3"
+                android:layout_toEndOf="@+id/imageCard"
+                android:fontFamily="@font/montserrat_regular"
+                android:letterSpacing="-0.02"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/size_13"
+                android:text="@{carddModel.rarity}"
+                android:textStyle="normal"
+                tools:text="Quality" />
+
+            <TextView
+                android:id="@+id/text_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/imageCard"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_below="@+id/text_quality"
+                android:layout_marginTop="@dimen/margin_3"
+                android:fontFamily="@font/montserrat_regular"
+                android:textStyle="normal"
+                android:textSize="@dimen/size_13"
+                android:text="@{carddModel.cardSet}"
+                android:textColor="@color/brown"
+                android:letterSpacing="-0.02"
+                tools:text="Set" />
+
+            <CheckBox
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:button="@drawable/selector_favlist_item"
+                app:useMaterialThemeColors="false" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

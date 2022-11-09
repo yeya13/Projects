@@ -21,7 +21,7 @@ class CardOverviewFragment() : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
     private val viewModel: CardOverviewViewModel by viewModels()
     private val args: CardOverviewFragmentArgs by navArgs()
-    private lateinit var hsCard: HSCardsByClassModel
+    private lateinit var card: HSCardsByClassModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +42,7 @@ class CardOverviewFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         args.hsCard?.let {
-            hsCard = it.copy(
+            card = it.copy(
                 text = it.text?.let { text ->
                     HtmlCompat.fromHtml(
                         "<b>Effect: </b>$text",
@@ -68,14 +68,14 @@ class CardOverviewFragment() : Fragment() {
                     ).toString()
                 }
             )
-            binding.cardModel = hsCard
+            binding.cardModel = card
 
         }
-        viewModel.queryCard(hsCard)
+        args.hsCard?.let { viewModel.queryCard(it) }
     }
 
     fun goSearchPage(v: View) {
-        v.findNavController().navigate(R.id.action_cardOverviewFragment_to_homeFragment2)
+        v.findNavController().navigate(R.id.action_cardOverviewFragment_to_homeFragment)
     }
 
     fun checkFavorite() {

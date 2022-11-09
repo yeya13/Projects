@@ -38,7 +38,9 @@ class CardOverviewViewModel @Inject constructor(
             type = _cards.value?.type,
             rarity = _cards.value?.rarity,
             cardSet = _cards.value?.cardSet,
-            img = _cards.value?.img
+            img = _cards.value?.img,
+            text = _cards.value?.text,
+            playerClass = _cards.value?.playerClass
         )
     }
 

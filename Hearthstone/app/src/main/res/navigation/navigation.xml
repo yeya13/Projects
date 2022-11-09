@@ -24,6 +24,9 @@
                 android:name="hsName"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 
     <fragment
@@ -65,7 +68,24 @@
             app:nullable="true" />
 
         <action
-            android:id="@+id/action_cardOverviewFragment_to_homeFragment2"
+            android:id="@+id/action_cardOverviewFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.hearthstone.ui.favoritepage.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_cardOverviewFragment"
+            app:destination="@id/cardOverviewFragment">
+            <argument
+                android:name="hsCard"
+                app:argType="com.example.hearthstone.data.model.HSCardsByClassModel" />
+        </action>
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
