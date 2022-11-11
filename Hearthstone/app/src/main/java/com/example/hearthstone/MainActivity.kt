@@ -1,12 +1,10 @@
 package com.example.hearthstone
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.hearthstone.ui.shopPage.ShopFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
-            Log.d("Clau", "${item.itemId}")
             when(item.itemId) {
                 R.id.bottom_av_homeFragment -> {
                     navController.navigate(R.id.homeFragment)
