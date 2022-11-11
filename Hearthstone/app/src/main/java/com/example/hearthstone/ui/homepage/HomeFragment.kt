@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,11 +22,22 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                // in here you can do logic when backPress is clicked
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
         return binding.root
     }
 
@@ -33,11 +45,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         buttonSearch()
-
-        //This is only to open the favorite page, when I add the bottom navigation I will delete this
-        binding.logo.setOnClickListener{
-            it.findNavController().navigate(R.id.action_homeFragment_to_favoritesFragment)
-        }
 
         viewModel.cards.observe(viewLifecycleOwner) {
             binding.myRV.adapter = it?.let { cards -> HearthstoneAdapter(cards) }

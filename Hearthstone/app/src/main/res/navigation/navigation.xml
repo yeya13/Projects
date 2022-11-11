@@ -5,53 +5,54 @@
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
 
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.hearthstone.ui.homepage.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_searchPageFragment"
-            app:destination="@id/searchPageFragment">
+            app:destination="@id/searchPageFragment"
+            app:popUpTo="@id/homeFragment">
             <argument
                 android:name="hsClass"
-                app:argType="string"/>
+                app:argType="string" />
         </action>
         <action
             android:id="@+id/action_homeFragment_to_searchPageFragment_cardName"
-            app:destination="@id/searchPageFragment">
+            app:destination="@id/searchPageFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true">
             <argument
                 android:name="hsName"
                 app:argType="string" />
         </action>
-        <action
-            android:id="@+id/action_homeFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.hearthstone.ui.favoritepage.FavoritesFragment"
+        android:label="FavoritesFragment">
     </fragment>
 
     <fragment
         android:id="@+id/searchPageFragment"
         android:name="com.example.hearthstone.ui.searchpage.SearchPageFragment"
-        android:label="fragment_search_page"
-        tools:layout="@layout/fragment_search_page">
+        android:label="SearchPageFragment" >
         <argument
             android:name="hsClass"
             app:nullable="true"
             android:defaultValue="@null"
             app:argType="string"/>
-       <argument
+        <argument
             android:name="hsName"
             app:nullable="true"
             android:defaultValue="@null"
             app:argType="string"/>
         <action
-            android:id="@+id/action_searchPageFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_searchPageFragment_to_cardOverviewFragment"
-            app:destination="@id/cardOverviewFragment">
+            app:destination="@id/cardOverviewFragment"
+            app:popUpToSaveState="true">
             <argument
                 android:name="hsCard"
                 app:argType="com.example.hearthstone.data.model.HSCardsByClassModel" />
@@ -66,26 +67,5 @@
             android:name="hsCard"
             app:argType="com.example.hearthstone.data.model.HSCardsByClassModel"
             app:nullable="true" />
-
-        <action
-            android:id="@+id/action_cardOverviewFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.example.hearthstone.ui.favoritepage.FavoritesFragment"
-        android:label="FavoritesFragment" >
-        <action
-            android:id="@+id/action_favoritesFragment_to_cardOverviewFragment"
-            app:destination="@id/cardOverviewFragment">
-            <argument
-                android:name="hsCard"
-                app:argType="com.example.hearthstone.data.model.HSCardsByClassModel" />
-        </action>
-        <action
-            android:id="@+id/action_favoritesFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
