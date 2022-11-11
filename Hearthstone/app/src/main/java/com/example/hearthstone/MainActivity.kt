@@ -1,25 +1,17 @@
 package com.example.hearthstone
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
-import com.example.hearthstone.databinding.ActivityMainBinding
-import com.example.hearthstone.databinding.FragmentFavoritesBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,15 +21,19 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         // Setup the bottom navigation view with navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
         bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.bottom_av_homeFragment -> {
                     navController.navigate(R.id.homeFragment)
-
                     true
                 }
                 R.id.bottom_av_favoritesFragment -> {
                     navController.navigate(R.id.favoritesFragment)
+                    true
+                }
+                R.id.bottom_av_shopFragment -> {
+                    navController.navigate(R.id.shopFragment)
                     true
                 }
                 else -> false
@@ -45,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
         ourApplication = this.application
     }
-
     companion object {
         lateinit var ourApplication: Application
     }
