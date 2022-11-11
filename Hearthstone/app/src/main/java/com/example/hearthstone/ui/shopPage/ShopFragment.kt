@@ -9,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.hearthstone.R
+import com.example.hearthstone.databinding.FragmentMapBinding
+import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.ui.searchpage.SearchPageViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -30,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ShopFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: ShopViewModel by viewModels()
     private lateinit var map: GoogleMap
+    private lateinit var binding: FragmentMapBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private lateinit var clusterManager: ClusterManager<MyItem>
     private var lastSelectedMovieMarker: MyItem? = null
@@ -46,12 +50,16 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_map, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_map,
+            container, false
+        )
+
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.google_maps_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocation = LocationServices.getFusedLocationProviderClient(requireContext())
-        return view
+        return binding.root
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -79,7 +87,7 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
                         3000,
                         null
                     )
-                    map.addMarker(MarkerOptions().position(currentLocation).title("My location"))
+                    map.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.my_location)))
                     map.uiSettings.isMyLocationButtonEnabled = false
                 }
             }
@@ -132,13 +140,16 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
             }
 
             myItem.isSelected = true
+
             val marker = clusterRender.getMarker(myItem)
             clusterRender.onClusterItemChange(myItem, marker)
             destinationLocation = myItem.latLng
             distance = SphericalUtil.computeDistanceBetween(currentLocation, destinationLocation)
-            Toast.makeText(context, "Distance is \n " +
-                    String.format("%.2f", distance / 1000) +
-                    "km", Toast.LENGTH_SHORT).show()
+            val km = String.format("%.2f", distance / 1000)
+            myItem.km = "$km km"
+            binding.myItem = myItem
+            binding.movieTheaterDirection.visibility = View.VISIBLE
+            binding.movieTheaterName.visibility = View.VISIBLE
             lastSelectedMovieMarker = myItem
             true
         }

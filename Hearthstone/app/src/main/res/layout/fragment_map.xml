@@ -1,30 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.shopPage.ShopFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <fragment
-        android:id="@+id/google_maps_fragment"
+    <data>
+        <variable
+            name="myItem"
+            type="com.example.hearthstone.ui.shopPage.MyItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        tools:context=".ui.shopPage.ShopFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewShop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_36"
-        android:layout_marginStart="@dimen/margin_13"
-        android:layout_marginEnd="@dimen/margin_13"
-        android:background="@color/white"
-        app:searchIcon="@drawable/arrow_chevron_big_left"
-        app:iconifiedByDefault="true"
-        app:defaultQueryHint="@string/movie_theaters"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <fragment
+            android:id="@+id/google_maps_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchViewShop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_36"
+            android:layout_marginStart="@dimen/margin_13"
+            android:layout_marginEnd="@dimen/margin_13"
+            android:background="@color/white"
+            app:searchIcon="@drawable/arrow_chevron_big_left"
+            app:iconifiedByDefault="true"
+            app:defaultQueryHint="@string/movie_theaters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/movieTheaterDirection"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/rute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13"
+                    android:layout_marginTop="@dimen/margin_13"
+                    android:layout_marginBottom="@dimen/margin_13"
+                    android:src="@drawable/logo_copy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/directions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13"
+                    android:fontFamily="sans-serif"
+                    android:text="@={myItem.movieTheaterName}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_12_5"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/rute"
+                    app:layout_constraintStart_toEndOf="@+id/rute"
+                    app:layout_constraintTop_toTopOf="@+id/rute"
+                    tools:text="313 Noodle Ave" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/movieTheaterName"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/color_purple_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/movieTheaterDirection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/placeType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13"
+                    android:layout_marginTop="@dimen/margin_13"
+                    android:fontFamily="sans-serif"
+                    android:text="@{myItem.placeType}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_17_5"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HearthStone Card Shoppe" />
+
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_13"
+                    android:layout_marginBottom="@dimen/margin_13"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_12_5"
+                    android:textStyle="normal"
+                    android:text="@{myItem.type}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/placeType"
+                    app:layout_constraintTop_toBottomOf="@+id/placeType"
+                    tools:text="Card Shoppe" />
+
+                <TextView
+                    android:id="@+id/km"
+                    android:text="@{myItem.km}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/size_12_5"
+                    android:textColor="@color/white"
+                    tools:text="5 min"
+                    app:layout_constraintBottom_toBottomOf="@+id/type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/type" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/direction_copy"
+                    app:layout_constraintBottom_toTopOf="@+id/km"
+                    app:layout_constraintEnd_toEndOf="@+id/km" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

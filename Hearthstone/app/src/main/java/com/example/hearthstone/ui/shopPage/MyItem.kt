@@ -4,10 +4,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
 
-class MyItem(private var movieTheaterName: String, var latLng: LatLng) : ClusterItem {
+class MyItem(var movieTheaterName: String, var placeType: String, var type: String,var km: String, var latLng: LatLng) : ClusterItem {
 
     var isSelected: Boolean = false
-    lateinit var movieTheaters: MutableList<MyItem>
 
     override fun getPosition(): LatLng {
         return latLng

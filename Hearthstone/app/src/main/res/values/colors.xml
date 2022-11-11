@@ -13,5 +13,6 @@
     <color name="shadow_black">#80000000</color>
     <color name="yellow_letters">#fbcd1f</color>
     <color name="cyan">#50d398</color>
+    <color name="color_purple_cardView">#6200ee</color>
 
 </resources>

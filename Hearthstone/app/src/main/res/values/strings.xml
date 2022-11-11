@@ -11,6 +11,6 @@
     <string name="plaza_quinta">Cinepolis Plaza La Quinta</string>
     <string name="plaza_adana">Cinepolis Plaza Adana</string>
     <string name="go_settings_accept_permissions">Go to the settings and accept the permissions</string>
-    <string name="elimianme">Ola</string>
     <string name="movie_theaters">Search Movie Theaters</string>
+    <string name="my_location">My location</string>
 </resources>
