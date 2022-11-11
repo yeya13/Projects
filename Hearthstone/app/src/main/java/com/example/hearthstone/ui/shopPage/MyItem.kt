@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
 
-class MyItem(var movieTheaterName: String, var placeType: String, var type: String,var km: String, var latLng: LatLng) : ClusterItem {
+data class MyItem(var movieTheaterName: String, var placeType: String, var type: String,var km: String, var latLng: LatLng) : ClusterItem {
 
     var isSelected: Boolean = false
 
