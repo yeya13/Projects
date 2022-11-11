@@ -6,4 +6,11 @@
     <string name="ok">OK</string>
     <string name="search_cards">Search cards</string>
     <string name="search">Search</string>
+    <string name="patio_lincoln">Cinepolis Patio Lincoln</string>
+    <string name="plaza_cumbres">Cinepolis Plaza Cumbres</string>
+    <string name="plaza_quinta">Cinepolis Plaza La Quinta</string>
+    <string name="plaza_adana">Cinepolis Plaza Adana</string>
+    <string name="go_settings_accept_permissions">Go to the settings and accept the permissions</string>
+    <string name="elimianme">Ola</string>
+    <string name="movie_theaters">Search Movie Theaters</string>
 </resources>
