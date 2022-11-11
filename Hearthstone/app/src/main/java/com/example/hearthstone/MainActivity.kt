@@ -20,10 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    //private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
         val navHostFragment =
@@ -32,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         // Setup the bottom navigation view with navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
-            Log.d("Clau", "${item.itemId}")
             when(item.itemId) {
                 R.id.bottom_av_homeFragment -> {
                     navController.navigate(R.id.homeFragment)
