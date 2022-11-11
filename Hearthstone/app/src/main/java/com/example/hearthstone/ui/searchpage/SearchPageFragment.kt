@@ -96,7 +96,7 @@ class SearchPageFragment : Fragment() {
     }
 
     fun goHome(v: View) {
-        v.findNavController().navigate(R.id.action_searchPageFragment_to_homeFragment)
+        v.findNavController().popBackStack()
     }
 
     private fun validateSearch(): Boolean {
