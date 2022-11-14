@@ -38,4 +38,6 @@
     <dimen name="margin_41">41dp</dimen>
     <dimen name="margin_47">47dp</dimen>
     <dimen name="margin_100">100dp</dimen>
+    <dimen name="size_12_5">12.5sp</dimen>
+    <dimen name="size_17_5">17.5sp</dimen>
 </resources>
