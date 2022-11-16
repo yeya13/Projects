@@ -92,12 +92,6 @@ class SearchPageViewModel @Inject constructor(
             cardList.value = withContext(dispatcher.IO){
                 db.getAll()
             }
-            cardList.value?.let {
-                for (HSEntity in it){
-                    Log.d("mensaje", "id: ${HSEntity.id}, nombre: ${HSEntity.name}, tel: ${HSEntity.type}")
-                }
-            }
         }
     }
-
 }

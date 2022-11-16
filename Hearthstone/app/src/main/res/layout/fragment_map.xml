@@ -6,7 +6,7 @@
     <data>
         <variable
             name="myItem"
-            type="com.example.hearthstone.ui.shopPage.MyItem" />
+            type="com.example.hearthstone.data.model.MyItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

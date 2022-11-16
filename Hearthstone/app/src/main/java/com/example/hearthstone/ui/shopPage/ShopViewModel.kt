@@ -2,11 +2,9 @@ package com.example.hearthstone.ui.shopPage
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.hearthstone.data.network.repo.HSRepo
-import com.example.hearthstone.database.dao.HearthstoneDAO
+import com.example.hearthstone.data.model.MyItem
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel

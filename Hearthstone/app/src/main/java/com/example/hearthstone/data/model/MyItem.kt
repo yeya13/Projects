@@ -1,4 +1,4 @@
-package com.example.hearthstone.ui.shopPage
+package com.example.hearthstone.data.model
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem

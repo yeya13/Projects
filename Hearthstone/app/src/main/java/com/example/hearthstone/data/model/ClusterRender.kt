@@ -1,8 +1,8 @@
-package com.example.hearthstone.ui.shopPage
+package com.example.hearthstone.data.model
 
 import android.content.Context
-import android.widget.Toast
 import com.example.hearthstone.R
+import com.example.hearthstone.data.model.MyItem
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
@@ -10,10 +10,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 
-class ClusterRender(
+data class ClusterRender(
     val context: Context,
-    map: GoogleMap,
-    clusterManager: ClusterManager<MyItem>
+    val map: GoogleMap,
+    val clusterManager: ClusterManager<MyItem>
 ) : DefaultClusterRenderer<MyItem>(context, map, clusterManager) {
 
     override fun onBeforeClusterItemRendered(item: MyItem, markerOptions: MarkerOptions) {

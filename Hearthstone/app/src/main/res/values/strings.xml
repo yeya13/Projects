@@ -13,4 +13,6 @@
     <string name="go_settings_accept_permissions">Go to the settings and accept the permissions</string>
     <string name="movie_theaters">Search Movie Theaters</string>
     <string name="my_location">My location</string>
+    <string name="search_results_for">Search results for</string>
+    <string name="empty_field">Empty field</string>
 </resources>
