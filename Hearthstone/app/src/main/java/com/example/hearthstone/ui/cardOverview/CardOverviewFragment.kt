@@ -46,25 +46,25 @@ class CardOverviewFragment() : Fragment() {
             card = it.copy(
                 text = it.text?.let { text ->
                     HtmlCompat.fromHtml(
-                        "<b>Effect: </b>$text",
+                        "${getString(R.string.effect_text)} $text",
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     ).toString()
                 },
                 type = it.type?.let { type ->
                     HtmlCompat.fromHtml(
-                        "<b>Type: </b>$type",
+                        "${getString(R.string.type_text)} $type",
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     ).toString()
                 },
                 rarity = it.rarity?.let { rarity ->
                     HtmlCompat.fromHtml(
-                        "<b>Rarity: </b>$rarity",
+                        "${getString(R.string.rarity_text)} $rarity",
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     ).toString()
                 },
                 cardSet = it.cardSet?.let { set ->
                     HtmlCompat.fromHtml(
-                        "<b>Set: </b>$set",
+                        "${getString(R.string.set_text)} $set",
                         HtmlCompat.FROM_HTML_MODE_LEGACY
                     ).toString()
                 }
@@ -82,10 +82,10 @@ class CardOverviewFragment() : Fragment() {
     fun checkFavorite() {
         if (binding.icon.isChecked) {
             viewModel.insertCard()
-            Toast.makeText(context, "Added to favorite list", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.added_to_list), Toast.LENGTH_SHORT).show()
         } else {
             viewModel.deleteUser()
-            Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.removed_to_list), Toast.LENGTH_SHORT).show()
         }
     }
 }
