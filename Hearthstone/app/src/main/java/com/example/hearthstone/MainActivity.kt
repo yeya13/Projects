@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
         ourApplication = this.application
     }
+
+    override fun onBackPressed() {}
+
     companion object {
         lateinit var ourApplication: Application
     }
