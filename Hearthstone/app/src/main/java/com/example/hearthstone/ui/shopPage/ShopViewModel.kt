@@ -18,10 +18,10 @@ class ShopViewModel @Inject constructor(
         val placeType = "Cinepolis Movie Theater"
         val type = "Movie Theater"
         val km = ""
-        movieTheaters.add(MyItem("Cinepolis Patio Lincoln",placeType, type,km, LatLng(25.761685, -100.408863)))
-        movieTheaters.add(MyItem("Cinepolis Plaza Cumbres",placeType, type,km, LatLng(25.733346, -100.396985)))
-        movieTheaters.add(MyItem("Cinepolis Plaza La Quinta",placeType, type,km, LatLng(25.775264, -100.383001)))
-        movieTheaters.add(MyItem("Cinepolis Plaza Adana",placeType, type,km, LatLng(25.727014, -100.368883)))
+        movieTheaters.add(MyItem("Cinepolis Patio Lincoln",placeType, type,km, LatLng(25.761685, -100.408863), false))
+        movieTheaters.add(MyItem("Cinepolis Plaza Cumbres",placeType, type,km, LatLng(25.733346, -100.396985), false))
+        movieTheaters.add(MyItem("Cinepolis Plaza La Quinta",placeType, type,km, LatLng(25.775264, -100.383001), false))
+        movieTheaters.add(MyItem("Cinepolis Plaza Adana",placeType, type,km, LatLng(25.727014, -100.368883), false))
         return movieTheaters
     }
 }
