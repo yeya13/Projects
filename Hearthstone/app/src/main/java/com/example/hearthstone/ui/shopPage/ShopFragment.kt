@@ -132,7 +132,7 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
             if (lastSelectedMovieMarker != null) {
                 lastSelectedMovieMarker?.let {
                     it.isSelected = false
-                    val marker = clusterRender.getMarker(it)
+                    val marker = clusterRender.getMarker(lastSelectedMovieMarker)
                     clusterRender.onClusterItemChange(it, marker)
                 }
             }
