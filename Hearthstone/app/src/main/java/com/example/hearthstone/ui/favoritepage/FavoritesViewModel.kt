@@ -2,8 +2,10 @@ package com.example.hearthstone.ui.favoritepage
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.example.hearthstone.data.model.HSCardsByClassModel
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.hearthstone.database.dao.HearthstoneDAO
 import com.example.hearthstone.database.model.HearthstoneEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +30,6 @@ class FavoritesViewModel @Inject constructor(
             }
             _cardList.value?.let {
                 for (HSEntity in it){
-                    Log.d("mensaje", "id: ${HSEntity.id}, nombre: ${HSEntity.name}, tel: ${HSEntity.type}")
                 }
             }
         }

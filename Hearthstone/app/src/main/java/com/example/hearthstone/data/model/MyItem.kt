@@ -12,7 +12,6 @@ class MyItem(
     var latLng: LatLng,
     var isSelected: Boolean
 ) : ClusterItem {
-
     override fun getPosition(): LatLng {
         return latLng
     }
