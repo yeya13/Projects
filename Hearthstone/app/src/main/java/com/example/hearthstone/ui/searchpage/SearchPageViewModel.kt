@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.database.dao.HearthstoneDAO
@@ -35,11 +36,15 @@ class SearchPageViewModel @Inject constructor(
 
     private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
+    var _text = MutableLiveData<String>()
+    var text: LiveData<String> = _text
+
 
     fun getCardsByClass(className: String) {
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByClass(className)
             _cards.postValue(cardsFetched)
+
         }
     }
 
@@ -47,6 +52,7 @@ class SearchPageViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByName(cardName)
             _cardsName.postValue(cardsFetched)
+            _text.postValue("Search results for '$cardName'")
         }
     }
 

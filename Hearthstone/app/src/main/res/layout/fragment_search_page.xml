@@ -8,6 +8,9 @@
         <variable
             name="frag"
             type="com.example.hearthstone.ui.searchpage.SearchPageFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.hearthstone.ui.searchpage.SearchPageViewModel" />
     </data>
 
     <LinearLayout
@@ -60,6 +63,7 @@
                 android:textSize="@dimen/size_18"
                 android:textStyle="normal"
                 android:visibility="visible"
+                android:text="@{viewModel.text}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Search results for 'Druid'"/>

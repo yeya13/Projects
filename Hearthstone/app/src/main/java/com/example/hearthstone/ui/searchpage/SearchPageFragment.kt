@@ -59,8 +59,9 @@ class SearchPageFragment : Fragment() {
             binding.btnSearchSP.visibility = View.VISIBLE
             binding.className.visibility = View.GONE
             binding.backToHome.visibility = View.GONE
-            val text = getString(R.string.search_results_for)
-            binding.textSearch.text = "$text '$it'"
+            viewModel.text.observe(viewLifecycleOwner){
+                binding.textSearch.text = it
+            }
         }
 
         viewModel.getAllID()
@@ -113,9 +114,10 @@ class SearchPageFragment : Fragment() {
     fun buttonSearch() {
         if (validateSearch()) {
             val nameCard = binding.searchViewSP.query.toString()
-            val textSearch = "${getString(R.string.search_results_for)} '$nameCard'"
             viewModel.getCardsByName(nameCard)
-            binding.textSearch.text = textSearch
+            viewModel.text.observe(viewLifecycleOwner){
+                binding.textSearch.text = it
+            }
         }
     }
 
