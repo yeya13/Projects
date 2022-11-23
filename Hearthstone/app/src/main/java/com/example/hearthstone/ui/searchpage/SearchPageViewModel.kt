@@ -1,7 +1,6 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -36,23 +35,23 @@ class SearchPageViewModel @Inject constructor(
 
     private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
-    var _text = MutableLiveData<String>()
-    var text: LiveData<String> = _text
+    val text_searchResults = MutableLiveData<String>()
+    lateinit var stringResource: String
 
 
     fun getCardsByClass(className: String) {
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByClass(className)
             _cards.postValue(cardsFetched)
-
         }
     }
 
     fun getCardsByName(cardName: String) {
+        stringResource = getApplication<Application>().resources.getString(R.string.search_results_for)
+        text_searchResults.value = "$stringResource '$cardName'"
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByName(cardName)
             _cardsName.postValue(cardsFetched)
-            _text.postValue("Search results for '$cardName'")
         }
     }
 
