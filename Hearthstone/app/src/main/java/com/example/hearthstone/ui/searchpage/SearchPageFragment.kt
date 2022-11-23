@@ -60,9 +60,6 @@ class SearchPageFragment : Fragment() {
             binding.btnSearchSP.visibility = View.VISIBLE
             binding.className.visibility = View.GONE
             binding.backToHome.visibility = View.GONE
-            /*viewModel.text.observe(viewLifecycleOwner){
-                binding.textSearch.text = it
-            }*/
         }
 
         viewModel.getAllID()
