@@ -26,11 +26,6 @@ class FavoritesViewModel @Inject constructor(
             _cardList.value = withContext(dispatcher.IO){
                 db.getAll()
             }
-            _cardList.value?.let {
-                for (HSEntity in it){
-                    Log.d("mensaje", "id: ${HSEntity.id}, nombre: ${HSEntity.name}, tel: ${HSEntity.type}")
-                }
-            }
         }
     }
 

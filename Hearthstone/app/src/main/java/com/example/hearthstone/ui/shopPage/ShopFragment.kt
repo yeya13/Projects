@@ -1,7 +1,6 @@
 package com.example.hearthstone.ui.shopPage
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.example.hearthstone.R
+import com.example.hearthstone.data.model.ClusterRender
+import com.example.hearthstone.data.model.MyItem
 import com.example.hearthstone.databinding.FragmentMapBinding
-import com.example.hearthstone.databinding.FragmentSearchPageBinding
-import com.example.hearthstone.ui.searchpage.SearchPageViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -74,7 +73,6 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
-    @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
         if (!::map.isInitialized) return
         if (isPermissionsGranted()) {
@@ -134,7 +132,7 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
             if (lastSelectedMovieMarker != null) {
                 lastSelectedMovieMarker?.let {
                     it.isSelected = false
-                    val marker = clusterRender.getMarker(it)
+                    val marker = clusterRender.getMarker(lastSelectedMovieMarker)
                     clusterRender.onClusterItemChange(it, marker)
                 }
             }

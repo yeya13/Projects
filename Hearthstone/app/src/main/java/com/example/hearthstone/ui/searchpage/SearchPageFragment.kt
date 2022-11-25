@@ -59,8 +59,6 @@ class SearchPageFragment : Fragment() {
             binding.btnSearchSP.visibility = View.VISIBLE
             binding.className.visibility = View.GONE
             binding.backToHome.visibility = View.GONE
-            val nameCard = "Search results for '$it'"
-            binding.textSearch.text = nameCard
         }
 
         viewModel.getAllID()
@@ -104,7 +102,7 @@ class SearchPageFragment : Fragment() {
         with(binding) {
             if (searchViewSP.query.isNullOrEmpty()) {
                 isValid = false
-                Toast.makeText(context, "Empty field", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.empty_field), Toast.LENGTH_LONG).show()
             }
         }
         return isValid
@@ -113,9 +111,10 @@ class SearchPageFragment : Fragment() {
     fun buttonSearch() {
         if (validateSearch()) {
             val nameCard = binding.searchViewSP.query.toString()
-            val textSearch = "Search results for '$nameCard'"
             viewModel.getCardsByName(nameCard)
-            binding.textSearch.text = textSearch
+            viewModel.userSearch.observe(viewLifecycleOwner){
+                binding.textSearch.text = it
+            }
         }
     }
 

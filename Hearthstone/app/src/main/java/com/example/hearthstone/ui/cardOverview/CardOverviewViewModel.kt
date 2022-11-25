@@ -1,13 +1,13 @@
 package com.example.hearthstone.ui.cardOverview
 
 import android.app.Application
-import android.util.Log
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
-import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.database.dao.HearthstoneDAO
 import com.example.hearthstone.database.model.HearthstoneEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,6 +30,37 @@ class CardOverviewViewModel @Inject constructor(
     private val _fav = MutableLiveData<Boolean>(false)
     var fav: LiveData<Boolean> = _fav
 
+    private var _card = MutableLiveData<HSCardsByClassModel>()
+    var card: LiveData<HSCardsByClassModel> = _card
+
+    fun getInformationCards(cardModel: HSCardsByClassModel){
+        _card.value = cardModel.copy(
+            text = cardModel.text?.let { text ->
+                HtmlCompat.fromHtml(
+                    "${getApplication<Application>().resources.getString(R.string.effect_text)} $text",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                ).toString()
+            },
+            type = cardModel.type?.let { type ->
+                HtmlCompat.fromHtml(
+                    "${getApplication<Application>().resources.getString(R.string.type_text)} $type",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                ).toString()
+            },
+            rarity = cardModel.rarity?.let { rarity ->
+                HtmlCompat.fromHtml(
+                    "${getApplication<Application>().resources.getString(R.string.rarity_text)} $rarity",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                ).toString()
+            },
+            cardSet = cardModel.cardSet?.let { set ->
+                HtmlCompat.fromHtml(
+                    "${getApplication<Application>().resources.getString(R.string.set_text)} $set",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                ).toString()
+            }
+        )
+    }
 
     fun getCardData(): HearthstoneEntity {
         return HearthstoneEntity(
@@ -58,11 +89,6 @@ class CardOverviewViewModel @Inject constructor(
         viewModelScope.launch {
             cardList.value = withContext(dispatcher.IO){
                 db.getAll()
-            }
-            cardList.value?.let {
-                for (HSEntity in it){
-                    Log.d("mensaje", "id: ${HSEntity.id}, nombre: ${HSEntity.name}, tel: ${HSEntity.type}")
-                }
             }
         }
     }

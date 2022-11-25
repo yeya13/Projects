@@ -21,7 +21,6 @@ class CardOverviewFragment() : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
     private val viewModel: CardOverviewViewModel by viewModels()
     private val args: CardOverviewFragmentArgs by navArgs()
-    private lateinit var card: HSCardsByClassModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,35 +41,9 @@ class CardOverviewFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.hsCard?.let {
-            card = it.copy(
-                text = it.text?.let { text ->
-                    HtmlCompat.fromHtml(
-                        "<b>Effect: </b>$text",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                type = it.type?.let { type ->
-                    HtmlCompat.fromHtml(
-                        "<b>Type: </b>$type",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                rarity = it.rarity?.let { rarity ->
-                    HtmlCompat.fromHtml(
-                        "<b>Rarity: </b>$rarity",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                cardSet = it.cardSet?.let { set ->
-                    HtmlCompat.fromHtml(
-                        "<b>Set: </b>$set",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                }
-            )
-            binding.cardModel = card
-
+        args.hsCard?.let { cardModel ->
+            viewModel.getInformationCards(cardModel)
+            binding.cardModel = viewModel
         }
         args.hsCard?.let { viewModel.queryCard(it) }
     }
@@ -82,10 +55,10 @@ class CardOverviewFragment() : Fragment() {
     fun checkFavorite() {
         if (binding.icon.isChecked) {
             viewModel.insertCard()
-            Toast.makeText(context, "Added to favorite list", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.added_to_list), Toast.LENGTH_SHORT).show()
         } else {
             viewModel.deleteUser()
-            Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.removed_to_list), Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -13,4 +13,12 @@
     <string name="go_settings_accept_permissions">Go to the settings and accept the permissions</string>
     <string name="movie_theaters">Search Movie Theaters</string>
     <string name="my_location">My location</string>
+    <string name="search_results_for">Search results for</string>
+    <string name="empty_field">Empty field</string>
+    <string name="effect_text"><![CDATA[<b>Effect: </b>]]></string>
+    <string name="type_text"><![CDATA[<b>Type: </b>]]></string>
+    <string name="rarity_text"><![CDATA[<b>Rarity: </b>]]></string>
+    <string name="set_text"><![CDATA[<b>Set: </b>]]></string>
+    <string name="added_to_list">Added to favorite list</string>
+    <string name="removed_to_list">Removed to favorite list</string>
 </resources>
