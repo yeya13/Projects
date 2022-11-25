@@ -38,8 +38,7 @@ class SearchPageViewModel @Inject constructor(
     var _userSearch = MutableLiveData<String>()
     var userSearch: LiveData<String> = _userSearch
 
-    var _stringResource = MutableLiveData<String>(app.getString(R.string.search_results_for))
-    var stringResource: LiveData<String> = _stringResource
+    var stringResource = MutableLiveData<String>(app.getString(R.string.search_results_for))
 
 
 
