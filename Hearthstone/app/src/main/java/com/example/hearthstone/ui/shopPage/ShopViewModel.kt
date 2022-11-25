@@ -2,26 +2,45 @@ package com.example.hearthstone.ui.shopPage
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.hearthstone.data.model.MyItem
+import com.example.hearthstone.data.model.modelGooglePlaces.Geometry
+import com.example.hearthstone.data.model.modelGooglePlaces.ResultProperties
+import com.example.hearthstone.data.network.repo.GooglePlacesRepo
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ShopViewModel @Inject constructor(
-    app: Application
-) :
-    AndroidViewModel(app) {
+    app: Application,
+    private val repo: GooglePlacesRepo,
+    private val dispatcher: Dispatchers
+) : AndroidViewModel(app) {
 
-    fun getAllItem(): ArrayList<MyItem> {
+    private val _places = MutableLiveData<List<ResultProperties>?>()
+    val places: LiveData<List<ResultProperties>?> = _places
+
+
+    fun getPlaces(location: String) {
+        viewModelScope.launch(dispatcher.IO) {
+            val placesFetched = repo.getPlaces(location)
+            _places.postValue(placesFetched?.results)
+        }
+    }
+
+    fun getAllItem(name: String, geometry: Geometry): ArrayList<MyItem> {
+        var isSelected = false
         val movieTheaters: ArrayList<MyItem> = ArrayList()
-        val placeType = "Cinepolis Movie Theater"
-        val type = "Movie Theater"
+        val placeType = "Movie Theater"
         val km = ""
-        movieTheaters.add(MyItem("Cinepolis Patio Lincoln",placeType, type,km, LatLng(25.761685, -100.408863), false))
-        movieTheaters.add(MyItem("Cinepolis Plaza Cumbres",placeType, type,km, LatLng(25.733346, -100.396985), false))
-        movieTheaters.add(MyItem("Cinepolis Plaza La Quinta",placeType, type,km, LatLng(25.775264, -100.383001), false))
-        movieTheaters.add(MyItem("Cinepolis Plaza Adana",placeType, type,km, LatLng(25.727014, -100.368883), false))
+        val location: LatLng
+        location = LatLng(geometry.location.lat, geometry.location.lng)
+        movieTheaters.add(MyItem(name,placeType, placeType,km, location, isSelected))
         return movieTheaters
     }
 }

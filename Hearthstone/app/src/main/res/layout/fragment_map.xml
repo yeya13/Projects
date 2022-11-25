@@ -36,6 +36,78 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/movieTheaterName"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/color_purple_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/movieTheaterDirection"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/placeType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13"
+                    android:layout_marginTop="@dimen/margin_13"
+                    android:fontFamily="sans-serif"
+                    android:text="@{myItem.placeType}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_17_5"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HearthStone Card Shoppe" />
+
+                <TextView
+                    android:id="@+id/Type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@{myItem.type}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_12_5"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/placeType"
+                    tools:text="HearthStone Card Shoppe" />
+
+
+                <TextView
+                    android:id="@+id/km"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@{myItem.km}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_12_5"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:text="5 min" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/direction_copy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/movieTheaterDirection"
             android:visibility="gone"
             android:layout_width="match_parent"
@@ -74,77 +146,6 @@
                     app:layout_constraintStart_toEndOf="@+id/rute"
                     app:layout_constraintTop_toTopOf="@+id/rute"
                     tools:text="313 Noodle Ave" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/movieTheaterName"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/color_purple_cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/movieTheaterDirection"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/placeType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_13"
-                    android:layout_marginTop="@dimen/margin_13"
-                    android:fontFamily="sans-serif"
-                    android:text="@{myItem.placeType}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_17_5"
-                    android:textStyle="normal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="HearthStone Card Shoppe" />
-
-                <TextView
-                    android:id="@+id/type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_13"
-                    android:layout_marginBottom="@dimen/margin_13"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/size_12_5"
-                    android:textStyle="normal"
-                    android:text="@{myItem.type}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/placeType"
-                    app:layout_constraintTop_toBottomOf="@+id/placeType"
-                    tools:text="Card Shoppe" />
-
-                <TextView
-                    android:id="@+id/km"
-                    android:text="@{myItem.km}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_15"
-                    android:fontFamily="sans-serif-medium"
-                    android:textStyle="normal"
-                    android:textSize="@dimen/size_12_5"
-                    android:textColor="@color/white"
-                    tools:text="5 min"
-                    app:layout_constraintBottom_toBottomOf="@+id/type"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/type" />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/direction_copy"
-                    app:layout_constraintBottom_toTopOf="@+id/km"
-                    app:layout_constraintEnd_toEndOf="@+id/km" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

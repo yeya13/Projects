@@ -29,7 +29,7 @@ import com.google.maps.android.clustering.ClusterManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShopFragment : Fragment(), OnMapReadyCallback {
+class ShopFragment : Fragment(), OnMapReadyCallback{
     private val viewModel: ShopViewModel by viewModels()
     private lateinit var map: GoogleMap
     private lateinit var binding: FragmentMapBinding
@@ -73,6 +73,7 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
+
     private fun enableMyLocation() {
         if (!::map.isInitialized) return
         if (isPermissionsGranted()) {
@@ -85,8 +86,13 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
                         3000,
                         null
                     )
+                    val lat = currentLocation.latitude.toString()
+                    val long = currentLocation.longitude.toString()
+                    val location = "$lat,$long"
+                    viewModel.getPlaces(location)
                     map.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.my_location)))
                     map.uiSettings.isMyLocationButtonEnabled = false
+                    map.uiSettings.isZoomControlsEnabled = true
                 }
             }
         } else {
@@ -118,27 +124,31 @@ class ShopFragment : Fragment(), OnMapReadyCallback {
         clusterManager = ClusterManager(context, map)
         // Point the map's listeners at the listeners implemented by the cluster manager
         map.setOnCameraIdleListener(clusterManager)
-        clusterManager.addItems(viewModel.getAllItem())
+
+        viewModel.places.observe(viewLifecycleOwner){ list ->
+            list?.forEach {result ->
+                clusterManager.addItems(viewModel.getAllItem(result.name, result.geometry))
+            }
+        }
         clusterManager.cluster()
-        val render = ClusterRender(requireContext(), map, clusterManager)
+        val render = ClusterRender(requireContext(), map = map, clusterManager = clusterManager)
         clusterManager.renderer = render
 
     }
 
+
     private fun itemSelect() {
         clusterManager.setOnClusterItemClickListener { myItem ->
             val clusterRender = clusterManager.renderer as ClusterRender
-
             if (lastSelectedMovieMarker != null) {
                 lastSelectedMovieMarker?.let {
                     it.isSelected = false
-                    val marker = clusterRender.getMarker(lastSelectedMovieMarker)
-                    clusterRender.onClusterItemChange(it, marker)
+                    val marker = clusterRender.getMarker(it)
+                    clusterRender.onClusterItemChange(myItem,marker)
                 }
             }
 
             myItem.isSelected = true
-
             val marker = clusterRender.getMarker(myItem)
             clusterRender.onClusterItemChange(myItem, marker)
             destinationLocation = myItem.latLng

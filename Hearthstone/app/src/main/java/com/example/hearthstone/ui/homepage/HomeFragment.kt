@@ -22,16 +22,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                // in here you can do logic when backPress is clicked
-            }
-        })
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +46,7 @@ class HomeFragment : Fragment() {
         with(binding) {
             if (searchView.query.isNullOrEmpty()) {
                 isValid = false
-                Toast.makeText(context, "Empty field", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.empty_field), Toast.LENGTH_LONG).show()
             }
         }
         return isValid

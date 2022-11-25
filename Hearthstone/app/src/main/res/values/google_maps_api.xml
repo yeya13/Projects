@@ -3,5 +3,5 @@
     <string
         name="google_map_apiKey"
         templateMergeStrategy="preserve"
-        translatable="false">api</string>
+        translatable="false">Api</string>
 </resources>
