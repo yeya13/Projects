@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Geometry (
+data class Geometry (
     @SerializedName("location")
     var location : Location
 ):Parcelable

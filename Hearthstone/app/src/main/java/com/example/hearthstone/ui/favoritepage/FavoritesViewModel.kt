@@ -1,7 +1,6 @@
 package com.example.hearthstone.ui.favoritepage
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,10 +26,6 @@ class FavoritesViewModel @Inject constructor(
         viewModelScope.launch {
             _cardList.value = withContext(dispatcher.IO){
                 db.getAll()
-            }
-            _cardList.value?.let {
-                for (HSEntity in it){
-                }
             }
         }
     }

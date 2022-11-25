@@ -1,13 +1,12 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
-import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.data.model.Result
 import com.example.hearthstone.data.network.repo.HSRepo
@@ -42,6 +41,12 @@ class SearchPageViewModel @Inject constructor(
     private val _errorDialog = MutableLiveData<ErrorDialog>()
     val errorDialog: LiveData<ErrorDialog> = _errorDialog
 
+    var _userSearch = MutableLiveData<String>()
+    var userSearch: LiveData<String> = _userSearch
+
+    var stringResource = app.getString(R.string.search_results_for)
+
+
 
     fun getCardsByClass(className: String) {
         viewModelScope.launch(dispatcher.IO) {
@@ -69,6 +74,7 @@ class SearchPageViewModel @Inject constructor(
 
             }
         }
+        _userSearch.value = "${stringResource} '$cardName'"
     }
 
     fun getAllID() {
