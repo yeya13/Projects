@@ -3,7 +3,6 @@ package com.example.hearthstone.ui.shopPage
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -91,7 +90,6 @@ class ShopFragment : Fragment(), OnMapReadyCallback{
                     val long = currentLocation.longitude.toString()
                     val location = "$lat,$long"
                     viewModel.getPlaces(location)
-                    Log.d("letra", "$location")
                     map.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.my_location)))
                     map.uiSettings.isMyLocationButtonEnabled = false
                     map.uiSettings.isZoomControlsEnabled = true

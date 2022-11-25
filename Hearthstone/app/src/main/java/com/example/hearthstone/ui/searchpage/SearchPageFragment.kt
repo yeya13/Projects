@@ -24,7 +24,6 @@ class SearchPageFragment : Fragment() {
     private lateinit var binding: FragmentSearchPageBinding
     private val viewModel: SearchPageViewModel by viewModels()
     private val args: SearchPageFragmentArgs by navArgs()
-    lateinit var text_search_results_for: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +36,6 @@ class SearchPageFragment : Fragment() {
         )
         binding.frag = this
         viewModel.getAllCards()
-        text_search_results_for = getString(R.string.search_results_for)
         return binding.root
     }
 
@@ -61,8 +59,6 @@ class SearchPageFragment : Fragment() {
             binding.btnSearchSP.visibility = View.VISIBLE
             binding.className.visibility = View.GONE
             binding.backToHome.visibility = View.GONE
-            val nameCard = "$text_search_results_for '$it'"
-            binding.textSearch.text = nameCard
         }
 
         viewModel.getAllID()
@@ -115,9 +111,10 @@ class SearchPageFragment : Fragment() {
     fun buttonSearch() {
         if (validateSearch()) {
             val nameCard = binding.searchViewSP.query.toString()
-            val textSearch = "$text_search_results_for '$nameCard'"
             viewModel.getCardsByName(nameCard)
-            binding.textSearch.text = textSearch
+            viewModel.userSearch.observe(viewLifecycleOwner){
+                binding.textSearch.text = it
+            }
         }
     }
 
