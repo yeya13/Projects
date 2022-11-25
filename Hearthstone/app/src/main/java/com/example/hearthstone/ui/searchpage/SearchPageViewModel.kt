@@ -35,8 +35,12 @@ class SearchPageViewModel @Inject constructor(
 
     private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
-    val text_searchResults = MutableLiveData<String>()
-    lateinit var stringResource: String
+    var _userSearch = MutableLiveData<String>()
+    var userSearch: LiveData<String> = _userSearch
+
+    var _stringResource = MutableLiveData<String>(app.getString(R.string.search_results_for))
+    var stringResource: LiveData<String> = _stringResource
+
 
 
     fun getCardsByClass(className: String) {
@@ -47,12 +51,11 @@ class SearchPageViewModel @Inject constructor(
     }
 
     fun getCardsByName(cardName: String) {
-        stringResource = getApplication<Application>().resources.getString(R.string.search_results_for)
-        text_searchResults.value = "$stringResource '$cardName'"
         viewModelScope.launch(dispatcher.IO) {
             val cardsFetched = repo.getCardsByName(cardName)
             _cardsName.postValue(cardsFetched)
         }
+        _userSearch.value = "${stringResource.value} '$cardName'"
     }
 
     fun getAllID() {

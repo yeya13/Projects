@@ -21,7 +21,6 @@ class CardOverviewFragment() : Fragment() {
     private lateinit var binding: FragmentCardOverviewBinding
     private val viewModel: CardOverviewViewModel by viewModels()
     private val args: CardOverviewFragmentArgs by navArgs()
-    private lateinit var card: HSCardsByClassModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,35 +41,9 @@ class CardOverviewFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.hsCard?.let {
-            card = it.copy(
-                text = it.text?.let { text ->
-                    HtmlCompat.fromHtml(
-                        "${getString(R.string.effect_text)} $text",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                type = it.type?.let { type ->
-                    HtmlCompat.fromHtml(
-                        "${getString(R.string.type_text)} $type",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                rarity = it.rarity?.let { rarity ->
-                    HtmlCompat.fromHtml(
-                        "${getString(R.string.rarity_text)} $rarity",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                },
-                cardSet = it.cardSet?.let { set ->
-                    HtmlCompat.fromHtml(
-                        "${getString(R.string.set_text)} $set",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString()
-                }
-            )
-            binding.cardModel = card
-
+        args.hsCard?.let { cardModel ->
+            viewModel.getInformationCards(cardModel)
+            binding.cardModel = viewModel
         }
         args.hsCard?.let { viewModel.queryCard(it) }
     }

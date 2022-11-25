@@ -35,7 +35,6 @@ class SearchPageFragment : Fragment() {
             container, false
         )
         binding.frag = this
-        binding.model = viewModel
         viewModel.getAllCards()
         return binding.root
     }
@@ -113,7 +112,7 @@ class SearchPageFragment : Fragment() {
         if (validateSearch()) {
             val nameCard = binding.searchViewSP.query.toString()
             viewModel.getCardsByName(nameCard)
-            viewModel.text_searchResults.observe(viewLifecycleOwner){
+            viewModel.userSearch.observe(viewLifecycleOwner){
                 binding.textSearch.text = it
             }
         }
