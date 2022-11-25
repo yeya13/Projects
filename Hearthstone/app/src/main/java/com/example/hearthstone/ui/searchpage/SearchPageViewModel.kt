@@ -38,7 +38,7 @@ class SearchPageViewModel @Inject constructor(
     var _userSearch = MutableLiveData<String>()
     var userSearch: LiveData<String> = _userSearch
 
-    var stringResource = MutableLiveData<String>(app.getString(R.string.search_results_for))
+    var stringResource = app.getString(R.string.search_results_for)
 
 
 
@@ -54,7 +54,7 @@ class SearchPageViewModel @Inject constructor(
             val cardsFetched = repo.getCardsByName(cardName)
             _cardsName.postValue(cardsFetched)
         }
-        _userSearch.value = "${stringResource.value} '$cardName'"
+        _userSearch.value = "${stringResource} '$cardName'"
     }
 
     fun getAllID() {
