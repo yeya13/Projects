@@ -61,4 +61,3 @@ class FormAdapter(var dataSet: List<FormEntity>?, val viewModel: MainScreenViewM
     }
 
 }
-

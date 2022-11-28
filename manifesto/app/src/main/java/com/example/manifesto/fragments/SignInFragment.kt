@@ -48,7 +48,7 @@ class SignInFragment : Fragment(){
         //test function update
         viewModel.opSuccessful.observe(viewLifecycleOwner, Observer{
             if(it){
-                showMessage("Succesful Update")
+                showMessage("Succesful Updatee")
                 findNavController().navigate(R.id.action_signInFragment_to_mainScreenFragment)
             }else{
                 showMessage("Error Update")
