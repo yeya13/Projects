@@ -1,37 +1,33 @@
 package com.example.manifesto.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.manifesto.R
 import com.example.manifesto.adapter.FormAdapter
 import com.example.manifesto.databinding.FragmentMainScreenBinding
 import com.example.manifesto.viewmodels.MainScreenViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
-    private lateinit var viewModel: MainScreenViewModel
+    private val viewModel: MainScreenViewModel by viewModels()
     private lateinit var adapter: FormAdapter
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_screen,container,false)
 
@@ -40,7 +36,6 @@ class MainScreenFragment : Fragment() {
             v.findNavController().navigate(R.id.action_mainScreenFragment_to_signInFragment)
         }
         //This is just a test to see the records in the database
-        viewModel = ViewModelProvider(this).get()
         viewModel.testDB()
 
         //RecyclerView

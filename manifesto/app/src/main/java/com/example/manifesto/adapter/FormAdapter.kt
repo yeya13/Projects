@@ -1,6 +1,5 @@
 package com.example.manifesto.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.example.manifesto.databinding.ItemListBinding
 import com.example.manifesto.dialogues.DeleteDialog
 import com.example.manifesto.fragments.MainScreenFragmentDirections
 import com.example.manifesto.viewmodels.MainScreenViewModel
+import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 class FormAdapter(var dataSet: List<FormEntity>?, val viewModel: MainScreenViewModel) :
     RecyclerView.Adapter<FormAdapter.ViewHolder>()  {
@@ -27,7 +27,6 @@ class FormAdapter(var dataSet: List<FormEntity>?, val viewModel: MainScreenViewM
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = dataSet?.get(position)
         item?.let {person ->
-            Log.i("item", "$person")
             viewHolder.linkItem(person)
         }
     }
@@ -52,7 +51,7 @@ class FormAdapter(var dataSet: List<FormEntity>?, val viewModel: MainScreenViewM
 
             //Button delete
             binding.btnDeleteItem.setOnClickListener {
-                val fragmentManager = (context as FragmentActivity).supportFragmentManager
+                val fragmentManager = (FragmentComponentManager.findActivity(context) as FragmentActivity).supportFragmentManager
                 var position = 0
                 dataSet?.let { dataset -> position = (dataset.indexOf(form)) }
                 DeleteDialog(form.fullName) { viewModel.deleteUser(form) }.show(fragmentManager, DeleteDialog::class.java.name)

@@ -1,34 +1,37 @@
 package com.example.manifesto.viewmodels
 
-import android.util.Log
-import androidx.lifecycle.LiveData
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.manifesto.database.config.FormApp.Companion.DB3
+import com.example.manifesto.database.dao.FormDAO
 import com.example.manifesto.database.models.FormEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MainScreenViewModel: ViewModel(){
+@HiltViewModel
+class MainScreenViewModel @Inject constructor(
+    app: Application,
+    private val dispatcher: Dispatchers,
+    private val DB3: FormDAO
+) : AndroidViewModel(app) {
     val personalList = MutableLiveData<List<FormEntity>?>()
 
-    fun testDB(){
+    fun testDB() {
         viewModelScope.launch {
-            personalList.value = withContext(Dispatchers.IO){
-                DB3.formDao().getAll()
-            }
-            for (formEntity in personalList.value!!){
-                Log.d("mensaje", "id: ${formEntity.id}, nombre: ${formEntity.fullName}, tel: ${formEntity.phoneNumber}")
+            personalList.value = withContext(dispatcher.IO) {
+                DB3.getAll()
             }
         }
     }
 
     fun deleteUser(obFormEntity: FormEntity) {
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                DB3.formDao().deletePerson(obFormEntity)
+            withContext(dispatcher.IO) {
+                DB3.deletePerson(obFormEntity)
             }
             testDB()
         }
