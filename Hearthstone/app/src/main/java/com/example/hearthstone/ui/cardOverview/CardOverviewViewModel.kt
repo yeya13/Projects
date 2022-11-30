@@ -1,6 +1,7 @@
 package com.example.hearthstone.ui.cardOverview
 
 import android.app.Application
+import android.widget.CompoundButton
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -33,7 +34,7 @@ class CardOverviewViewModel @Inject constructor(
     private var _card = MutableLiveData<HSCardsByClassModel>()
     var card: LiveData<HSCardsByClassModel> = _card
 
-    fun getInformationCards(cardModel: HSCardsByClassModel){
+    fun getInformationCards(cardModel: HSCardsByClassModel) {
         _card.value = cardModel.copy(
             text = cardModel.text?.let { text ->
                 HtmlCompat.fromHtml(
@@ -75,19 +76,19 @@ class CardOverviewViewModel @Inject constructor(
         )
     }
 
-    fun insertCard(){
+    fun insertCard() {
         val obFormEntity = getCardData()
         viewModelScope.launch {
-            withContext(dispatcher.IO){
+            withContext(dispatcher.IO) {
                 db.insertCard(obFormEntity)
             }
             getAllCards()
         }
     }
 
-    fun getAllCards(){
+    fun getAllCards() {
         viewModelScope.launch {
-            cardList.value = withContext(dispatcher.IO){
+            cardList.value = withContext(dispatcher.IO) {
                 db.getAll()
             }
         }
@@ -114,6 +115,14 @@ class CardOverviewViewModel @Inject constructor(
                 db.removeCard(obFormEntity)
             }
             getAllCards()
+        }
+    }
+
+    fun checkFavorite(button: CompoundButton, isCkecked: Boolean) {
+        if (isCkecked) {
+            insertCard()
+        } else {
+            deleteUser()
         }
     }
 }

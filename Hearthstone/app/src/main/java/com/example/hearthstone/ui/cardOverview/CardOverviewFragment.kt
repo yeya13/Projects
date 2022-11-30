@@ -51,14 +51,4 @@ class CardOverviewFragment() : Fragment() {
     fun goSearchPage(v: View) {
         v.findNavController().popBackStack()
     }
-
-    fun checkFavorite() {
-        if (binding.icon.isChecked) {
-            viewModel.insertCard()
-            Toast.makeText(context, getString(R.string.added_to_list), Toast.LENGTH_SHORT).show()
-        } else {
-            viewModel.deleteUser()
-            Toast.makeText(context, getString(R.string.removed_to_list), Toast.LENGTH_SHORT).show()
-        }
-    }
 }

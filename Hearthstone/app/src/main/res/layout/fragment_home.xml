@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="frag"
+            type="com.example.hearthstone.ui.homepage.HomeFragment" />
 
     </data>
 
@@ -86,6 +90,7 @@
         android:text="@string/search"
         android:textColor="@color/yellow_letters"
         android:textSize="@dimen/margin_15"
+        android:onClick="@{(view)-> frag.buttonSearch(view)}"
         app:layout_constraintBottom_toBottomOf="@+id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchView" />
