@@ -16,6 +16,7 @@ import com.example.hearthstone.adapter.HearthStoneAdapterSP
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.FragmentSearchPageBinding
 import com.example.hearthstone.dialogue.ErrorCardName
+import com.example.hearthstone.dialogue.ErrorDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,6 +74,11 @@ class SearchPageFragment : Fragment() {
                         this::removeCard
                     )
                 }
+        }
+
+        viewModel.errorDialog.observe(viewLifecycleOwner){
+            val fragmentManager = (activity as FragmentActivity).supportFragmentManager
+            it.show(fragmentManager, ErrorDialog::class.java.name)
         }
 
         viewModel.cardsName.observe(viewLifecycleOwner) { list ->
