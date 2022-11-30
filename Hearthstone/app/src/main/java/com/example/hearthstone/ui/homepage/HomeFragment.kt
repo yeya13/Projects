@@ -36,13 +36,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonSearch()
-
         viewModel.cards.observe(viewLifecycleOwner) {
             binding.myRV.adapter = it?.let { cards -> HearthstoneAdapter(cards) }
         }
 
-        viewModel.errorDialog.observe(viewLifecycleOwner){
+        viewModel.errorDialog.observe(viewLifecycleOwner) {
             val fragmentManager = (activity as FragmentActivity).supportFragmentManager
             it.show(fragmentManager, ErrorDialog::class.java.name)
         }
@@ -59,16 +57,13 @@ class HomeFragment : Fragment() {
         return isValid
     }
 
-    private fun buttonSearch() {
-        binding.btnSearch.setOnClickListener { v: View ->
-            if (validateSearch()) {
-                val textSearch = binding.searchView.query.toString()
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToSearchPageFragmentCardName(
-                        textSearch
-                    )
-                v.findNavController().navigate(action)
-            }
+    fun buttonSearch(v: View) {
+        if (validateSearch()) {
+            val textSearch = binding.searchView.query.toString()
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToSearchPageFragmentCardName(
+                    textSearch)
+            v.findNavController().navigate(action)
         }
     }
 }

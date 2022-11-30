@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.R
 import com.example.hearthstone.database.model.HearthstoneEntity
 import com.example.hearthstone.databinding.CardFavoriteItemBinding
+import com.example.hearthstone.ui.favoritepage.FavoritesViewModel
 
 class HearthstoneAdapterFav(
     private var card: List<HearthstoneEntity>,
-    var removeFunction: (HearthstoneEntity) -> Unit,
+    val viewModel: FavoritesViewModel
 ) : RecyclerView.Adapter<HearthstoneAdapterFav.HearthstoneViewHolder>() {
 
     inner class HearthstoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -20,15 +21,9 @@ class HearthstoneAdapterFav(
 
         fun linkItem(card: HearthstoneEntity) {
             binding.carddModel = card
+            binding.viewModel = viewModel
             binding.icon.isChecked = true
-
-            binding.icon.setOnClickListener {
-                Toast.makeText(context, "Removed to favorite list", Toast.LENGTH_LONG)
-                    .show()
-                removeFunction.invoke(card)
-            }
         }
-
     }
 
     override fun onCreateViewHolder(

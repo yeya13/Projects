@@ -7,6 +7,10 @@
         <variable
             name="carddModel"
             type="com.example.hearthstone.database.model.HearthstoneEntity" />
+
+        <variable
+            name="viewModel"
+            type="com.example.hearthstone.ui.favoritepage.FavoritesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -104,6 +108,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/margin_30"
                 android:layout_marginEnd="@dimen/margin_20"
+                android:onClick="@{()-> viewModel.deleteUser(carddModel)}"
                 android:button="@drawable/selector_favlist_item"
                 app:useMaterialThemeColors="false" />
         </RelativeLayout>

@@ -35,7 +35,7 @@ class FavoritesFragment : Fragment() {
             binding.myRecyclerViewFav.adapter = list?.let { cards ->
                 HearthstoneAdapterFav(
                     cards,
-                    this::removeCard
+                    viewModel
                 )
             }
         }
@@ -44,9 +44,5 @@ class FavoritesFragment : Fragment() {
 
     fun backToHome(v: View) {
         v.findNavController().popBackStack()
-    }
-
-    private fun removeCard(hsCard: HearthstoneEntity) {
-        viewModel.deleteUser(hsCard)
     }
 }
