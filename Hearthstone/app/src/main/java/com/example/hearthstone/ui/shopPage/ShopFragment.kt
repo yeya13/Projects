@@ -16,6 +16,7 @@ import com.example.hearthstone.R
 import com.example.hearthstone.data.model.ClusterRender
 import com.example.hearthstone.data.model.MyItem
 import com.example.hearthstone.databinding.FragmentMapBinding
+import com.example.hearthstone.dialogue.ErrorDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,13 +30,13 @@ import com.google.maps.android.clustering.ClusterManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShopFragment : Fragment(), OnMapReadyCallback{
+class ShopFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: ShopViewModel by viewModels()
     private lateinit var map: GoogleMap
     private lateinit var binding: FragmentMapBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private lateinit var clusterManager: ClusterManager<MyItem>
-    private var lastSelectedMovieMarker: MyItem? = null
+    var lastSelectedMovieMarker: MyItem? = null
     lateinit var currentLocation: LatLng
     lateinit var destinationLocation: LatLng
     var distance: Double = 0.0
@@ -58,6 +59,12 @@ class ShopFragment : Fragment(), OnMapReadyCallback{
             childFragmentManager.findFragmentById(R.id.google_maps_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocation = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        viewModel.errorDialog.observe(viewLifecycleOwner) {
+            val fragmentManager = (activity as FragmentActivity).supportFragmentManager
+            it.show(fragmentManager, ErrorDialog::class.java.name)
+        }
+
         return binding.root
     }
 
@@ -88,9 +95,12 @@ class ShopFragment : Fragment(), OnMapReadyCallback{
                     )
                     val lat = currentLocation.latitude.toString()
                     val long = currentLocation.longitude.toString()
-                    val location = "$lat,$long"
-                    viewModel.getPlaces(location)
-                    map.addMarker(MarkerOptions().position(currentLocation).title(getString(R.string.my_location)))
+                    val realLocation = "$lat,$long"
+                    viewModel.getPlaces(realLocation)
+                    map.addMarker(
+                        MarkerOptions().position(currentLocation)
+                            .title(getString(R.string.my_location))
+                    )
                     map.uiSettings.isMyLocationButtonEnabled = false
                     map.uiSettings.isZoomControlsEnabled = true
                 }
@@ -125,8 +135,8 @@ class ShopFragment : Fragment(), OnMapReadyCallback{
         // Point the map's listeners at the listeners implemented by the cluster manager
         map.setOnCameraIdleListener(clusterManager)
 
-        viewModel.places.observe(viewLifecycleOwner){ list ->
-            list?.forEach {result ->
+        viewModel.places.observe(viewLifecycleOwner) { list ->
+            list?.forEach { result ->
                 clusterManager.addItems(viewModel.getAllItem(result.name, result.geometry))
             }
         }
@@ -140,25 +150,26 @@ class ShopFragment : Fragment(), OnMapReadyCallback{
     private fun itemSelect() {
         clusterManager.setOnClusterItemClickListener { myItem ->
             val clusterRender = clusterManager.renderer as ClusterRender
+
             if (lastSelectedMovieMarker != null) {
-                lastSelectedMovieMarker?.let {
+                lastSelectedMovieMarker?.let { it ->
                     it.isSelected = false
-                    val marker = clusterRender.getMarker(it)
-                    clusterRender.onClusterItemChange(myItem,marker)
+                    val marker = clusterRender.getMarker(lastSelectedMovieMarker)
+                    clusterRender.onClusterItemChange(it, marker)
                 }
             }
-
             myItem.isSelected = true
             val marker = clusterRender.getMarker(myItem)
             clusterRender.onClusterItemChange(myItem, marker)
+            lastSelectedMovieMarker = myItem
             destinationLocation = myItem.latLng
-            distance = SphericalUtil.computeDistanceBetween(currentLocation, destinationLocation)
+            distance =
+                SphericalUtil.computeDistanceBetween(currentLocation, destinationLocation)
             val km = String.format("%.2f", distance / 1000)
             myItem.km = "$km km"
             binding.myItem = myItem
             binding.movieTheaterDirection.visibility = View.VISIBLE
             binding.movieTheaterName.visibility = View.VISIBLE
-            lastSelectedMovieMarker = myItem
             true
         }
     }

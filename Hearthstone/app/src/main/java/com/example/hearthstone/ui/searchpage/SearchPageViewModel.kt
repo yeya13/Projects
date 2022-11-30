@@ -1,15 +1,18 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hearthstone.R
 import com.example.hearthstone.data.model.HSCardsByClassModel
+import com.example.hearthstone.data.model.Result
 import com.example.hearthstone.data.network.repo.HSRepo
 import com.example.hearthstone.database.dao.HearthstoneDAO
 import com.example.hearthstone.database.model.HearthstoneEntity
+import com.example.hearthstone.dialogue.ErrorDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +38,9 @@ class SearchPageViewModel @Inject constructor(
 
     private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
+    private val _errorDialog = MutableLiveData<ErrorDialog>()
+    val errorDialog: LiveData<ErrorDialog> = _errorDialog
+
     var _userSearch = MutableLiveData<String>()
     var userSearch: LiveData<String> = _userSearch
 
@@ -44,15 +50,29 @@ class SearchPageViewModel @Inject constructor(
 
     fun getCardsByClass(className: String) {
         viewModelScope.launch(dispatcher.IO) {
-            val cardsFetched = repo.getCardsByClass(className)
-            _cards.postValue(cardsFetched)
+            when(val cardsFetched = repo.getCardsByClass(className)){
+                is Result.Success -> {
+                    _cards.postValue(cardsFetched.data)
+                }
+                is Result.Error -> {
+                    _errorDialog.postValue(ErrorDialog())
+                }
+
+            }
         }
     }
 
     fun getCardsByName(cardName: String) {
         viewModelScope.launch(dispatcher.IO) {
-            val cardsFetched = repo.getCardsByName(cardName)
-            _cardsName.postValue(cardsFetched)
+            when(val cardsFetched = repo.getCardsByName(cardName)){
+                is Result.Success -> {
+                    _cardsName.postValue(cardsFetched.data)
+                }
+                is Result.Error -> {
+                    _errorDialog.postValue(ErrorDialog())
+                }
+
+            }
         }
         _userSearch.value = "${stringResource} '$cardName'"
     }
@@ -101,4 +121,5 @@ class SearchPageViewModel @Inject constructor(
             }
         }
     }
+
 }
