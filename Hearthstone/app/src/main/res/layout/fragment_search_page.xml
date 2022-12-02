@@ -68,22 +68,34 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Search results for 'Druid'"/>
 
-            <androidx.appcompat.widget.SearchView
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/searchViewSP"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
                 android:layout_marginEnd="@dimen/margin_80"
-                android:background="@drawable/search_background"
+                android:hint="@string/search_cards"
                 android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="@string/search_cards"
-                android:scrollbarThumbHorizontal="@color/purple_200"
-                android:visibility="visible"
+                app:boxBackgroundColor="@color/background_search"
+                app:boxCornerRadiusBottomEnd="@dimen/margin_16"
+                app:boxCornerRadiusBottomStart="@dimen/margin_16"
+                app:boxCornerRadiusTopEnd="@dimen/margin_16"
+                app:boxCornerRadiusTopStart="@dimen/margin_16"
+                app:boxStrokeColor="@android:color/transparent"
+                app:endIconMode="custom"
+                app:hintTextColor="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textSearch" />
+                app:layout_constraintTop_toBottomOf="@+id/textSearch"
+                app:startIconDrawable="@drawable/ic_baseline_search_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:iconifiedByDefault="false"
+                    android:onTextChanged="@{(text, start, before, count)->viewModel.onTextChanged(text, start, before, count)}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/btnSearchSP"
@@ -93,9 +105,9 @@
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:letterSpacing="-0.02"
                 android:text="@string/search"
-                android:onClick="@{()->frag.buttonSearch()}"
                 android:textColor="@color/yellow_low"
                 android:textSize="@dimen/size_15"
+                android:onClick="@{()-> viewModel.buttonSearch()}"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/searchViewSP"
                 app:layout_constraintEnd_toEndOf="parent"

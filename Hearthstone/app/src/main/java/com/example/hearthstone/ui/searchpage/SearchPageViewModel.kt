@@ -1,6 +1,8 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
+import android.util.Log
+import android.widget.CompoundButton
 
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -45,6 +47,9 @@ class SearchPageViewModel @Inject constructor(
     var userSearch: LiveData<String> = _userSearch
 
     var stringResource = app.getString(R.string.search_results_for)
+
+    var _query = MutableLiveData<String>()
+
 
 
 
@@ -122,4 +127,31 @@ class SearchPageViewModel @Inject constructor(
         }
     }
 
+    fun checkFavorite(buttonView: CompoundButton, value: Boolean, card: HSCardsByClassModel) {
+        if (value) {
+            insertCard(card)
+        } else {
+            deleteCard(card)
+        }
+    }
+
+    fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+        _query.value = text.toString()
+    }
+
+    fun validateSearch(): Boolean {
+        var isValid = true
+        val textSearch = _query.value
+        if (textSearch.isNullOrEmpty()) {
+            isValid = false
+        }
+        return isValid
+    }
+
+    fun buttonSearch() {
+        if (validateSearch()) {
+            val nameCard =_query.value.toString()
+            getCardsByName(nameCard)
+        }
+    }
 }

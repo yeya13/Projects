@@ -36,7 +36,12 @@ class SearchPageFragment : Fragment() {
             container, false
         )
         binding.frag = this
+        binding.viewModel = viewModel
         viewModel.getAllCards()
+
+        viewModel.userSearch.observe(viewLifecycleOwner){
+            binding.textSearch.text = it
+        }
         return binding.root
     }
 
@@ -70,8 +75,7 @@ class SearchPageFragment : Fragment() {
                     HearthStoneAdapterSP(
                         it,
                         viewModel.cardsID.value,
-                        this::insertCard,
-                        this::removeCard
+                        viewModel
                     )
                 }
         }
@@ -87,8 +91,7 @@ class SearchPageFragment : Fragment() {
                     HearthStoneAdapterSP(
                         it,
                         viewModel.cardsID.value,
-                        this::insertCard,
-                        this::removeCard
+                        viewModel
                     )
                 }
 
@@ -101,34 +104,5 @@ class SearchPageFragment : Fragment() {
 
     fun goHome(v: View) {
         v.findNavController().popBackStack()
-    }
-
-    private fun validateSearch(): Boolean {
-        var isValid = true
-        with(binding) {
-            if (searchViewSP.query.isNullOrEmpty()) {
-                isValid = false
-                Toast.makeText(context, getString(R.string.empty_field), Toast.LENGTH_LONG).show()
-            }
-        }
-        return isValid
-    }
-
-    fun buttonSearch() {
-        if (validateSearch()) {
-            val nameCard = binding.searchViewSP.query.toString()
-            viewModel.getCardsByName(nameCard)
-            viewModel.userSearch.observe(viewLifecycleOwner){
-                binding.textSearch.text = it
-            }
-        }
-    }
-
-    fun insertCard(hsCard: HSCardsByClassModel) {
-        viewModel.insertCard(hsCard)
-    }
-
-    fun removeCard(hsCard: HSCardsByClassModel) {
-        viewModel.deleteCard(hsCard)
     }
 }

@@ -8,6 +8,9 @@
         <variable
             name="frag"
             type="com.example.hearthstone.ui.homepage.HomeFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.hearthstone.ui.homepage.HomeViewModel" />
 
     </data>
 
@@ -19,95 +22,109 @@
         tools:context=".ui.homepage.HomeFragment">
 
 
-    <ImageView
-        android:id="@+id/emblem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_23"
-        android:layout_marginTop="@dimen/margin_36"
-        android:layout_marginEnd="@dimen/margin_23"
-        android:src="@drawable/emblem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/emblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_23"
+            android:layout_marginTop="@dimen/margin_36"
+            android:layout_marginEnd="@dimen/margin_23"
+            android:src="@drawable/emblem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_98"
-        android:src="@drawable/logo"
-        android:layout_marginTop="@dimen/margin_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emblem" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_98"
+            android:src="@drawable/logo"
+            android:layout_marginTop="@dimen/margin_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emblem" />
 
-    <ImageView
-        android:id="@+id/particles"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/particles2"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/particles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/particles2"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/background_tint"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/tint"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/background_tint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/tint"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginTop="@dimen/margin_25"
-        android:layout_marginEnd="@dimen/margin_80"
-        android:background="@drawable/search_background"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="@string/search_cards"
-        android:scrollbarThumbHorizontal="@color/purple_200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchView"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="@dimen/margin_80"
+            android:hint="@string/search_cards"
+            android:iconifiedByDefault="false"
+            app:boxBackgroundColor="@color/background_search"
+            app:boxCornerRadiusBottomEnd="@dimen/margin_16"
+            app:boxCornerRadiusBottomStart="@dimen/margin_16"
+            app:boxCornerRadiusTopEnd="@dimen/margin_16"
+            app:boxCornerRadiusTopStart="@dimen/margin_16"
+            app:boxStrokeColor="@android:color/transparent"
+            app:endIconMode="custom"
+            app:hintTextColor="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo"
+            app:startIconDrawable="@drawable/ic_baseline_search_24">
 
-    <TextView
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_16"
-        android:fontFamily="@font/montserrat_semi_bold"
-        android:letterSpacing="-0.02"
-        android:text="@string/search"
-        android:textColor="@color/yellow_letters"
-        android:textSize="@dimen/margin_15"
-        android:onClick="@{(view)-> frag.buttonSearch(view)}"
-        app:layout_constraintBottom_toBottomOf="@+id/searchView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchView" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:onTextChanged="@{(text, start, before, count)->viewModel.onTextChanged(text, start, before, count)}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myRV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginTop="@dimen/margin_18"
-        android:layout_marginEnd="@dimen/margin_16"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:itemCount="14"
-        tools:listitem="@layout/card_item"
-        app:spanCount="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:letterSpacing="-0.02"
+            android:text="@string/search"
+            android:textColor="@color/yellow_letters"
+            android:textSize="@dimen/margin_15"
+            android:onClick="@{()-> viewModel.buttonSearch()}"
+            app:layout_constraintBottom_toBottomOf="@+id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_18"
+            android:layout_marginEnd="@dimen/margin_16"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:itemCount="14"
+            tools:listitem="@layout/card_item"
+            app:spanCount="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

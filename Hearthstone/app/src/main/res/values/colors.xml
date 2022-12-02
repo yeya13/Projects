@@ -14,5 +14,6 @@
     <color name="yellow_letters">#fbcd1f</color>
     <color name="cyan">#50d398</color>
     <color name="color_purple_cardView">#6200ee</color>
+    <color name="background_search">#99000000</color>
 
 </resources>
