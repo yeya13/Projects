@@ -12,6 +12,7 @@ import com.example.reddit.R
 import com.example.reddit.data.model.ChildProperty
 import com.example.reddit.databinding.ArticleItemBinding
 import com.example.reddit.dialogues.TitleDialog
+import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 class RedditAdapter(var articles: List<ChildProperty>) :
     RecyclerView.Adapter<RedditAdapter.ArticleViewHolder>() {
@@ -21,19 +22,17 @@ class RedditAdapter(var articles: List<ChildProperty>) :
         var context = view.context
 
         fun bindArticle(article: ChildProperty) {
-            /*article.data.num_comments = article.data.num_comments + " Comments"
-            article.data.author = "Author: " + article.data.author*/
             binding.articleModel = article.data
 
             //Dialog to show the self text
             binding.tvTitle.setOnClickListener {
-                val fragmentManager = (context as FragmentActivity).supportFragmentManager
+                val fragmentManager = (FragmentComponentManager.findActivity(context) as FragmentActivity).supportFragmentManager
                 article.data.selftext?.let { selfText -> TitleDialog(selfText) }
                     ?.show(fragmentManager, TitleDialog::class.java.name)
             }
 
             binding.tvBrowser.setOnClickListener{
-               val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.data.url))
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.data.url))
                 startActivity(context, browserIntent, null)
             }
 
