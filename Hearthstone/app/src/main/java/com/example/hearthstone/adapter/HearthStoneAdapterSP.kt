@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.databinding.CardByClassItemBinding
 import com.example.hearthstone.ui.searchpage.SearchPageFragmentDirections
+import com.example.hearthstone.ui.searchpage.SearchPageViewModel
 
 class HearthStoneAdapterSP(
     private var cards: List<HSCardsByClassModel>,
     private var cardsID: List<String>? = null,
-    var insertFunction: (HSCardsByClassModel) -> Unit,
-    var removeFunction: (HSCardsByClassModel) -> Unit
+    val viewModel: SearchPageViewModel
 ) :
     RecyclerView.Adapter<HearthStoneAdapterSP.HearthstoneViewHolder>() {
     inner class HearthstoneViewHolder(var binding: CardByClassItemBinding) :
@@ -23,17 +23,10 @@ class HearthStoneAdapterSP(
         fun bindCardByClass(card: HSCardsByClassModel) {
             binding.cardModel = card
             binding.adapter = this
+            binding.viewModel = viewModel
 
             cardsID?.let { list ->
                 binding.icon.isChecked = list.contains(card.cardId)
-            }
-        }
-
-        fun toggleHeartIcon(card: HSCardsByClassModel) {
-            if (binding.icon.isChecked) {
-                insertFunction.invoke(card)
-            } else {
-                removeFunction.invoke(card)
             }
         }
 
@@ -42,7 +35,6 @@ class HearthStoneAdapterSP(
                 SearchPageFragmentDirections.actionSearchPageFragmentToCardOverviewFragment(card)
             v.findNavController().navigate(action)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HearthstoneViewHolder {
