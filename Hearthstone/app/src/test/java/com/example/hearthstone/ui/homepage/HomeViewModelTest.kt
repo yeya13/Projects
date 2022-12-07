@@ -58,7 +58,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `getCardsByClass should return Error`(){
+    fun `getCardsByClass should return Error`() {
         runTest {
             //Given
             coEvery { mockRepoImpl.getCards() } returns expectedError
@@ -72,7 +72,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `onTextChange should update query variable`(){
+    fun `onTextChange should update query variable`() {
         runTest {
             //When
             testViewModel.onTextChanged("Kotlin")
@@ -83,31 +83,29 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `validateSearch should return true`(){
-        runTest {
-            //When
-            testViewModel.onTextChanged("Kotlin")
-            testViewModel.validateSearch()
+    fun `validateSearch should return true`() {
 
-        }
+        //When
+        testViewModel.onTextChanged("Kotlin")
+        val result = testViewModel.validateSearch()
+
         //Then
-        assertEquals(true, testViewModel.validateSearch())
+        assertEquals(true, result)
     }
 
     @Test
-    fun `validateSearch should return false`(){
-        runTest {
-            //When
-            testViewModel.onTextChanged("")
-            testViewModel.validateSearch()
+    fun `validateSearch should return false`() {
 
-        }
+        //When
+        testViewModel.onTextChanged("")
+        val result = testViewModel.validateSearch()
+
         //Then
-        assertEquals(false, testViewModel.validateSearch())
+        assertEquals(false, result)
     }
 
     @Test
-    fun `buttonSearch should update userSearch variable`(){
+    fun `buttonSearch should update userSearch variable`() {
         runTest {
             //When
             testViewModel.onTextChanged("Kotlin")
@@ -120,7 +118,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `buttonSearch should not update userSearch variable`(){
+    fun `buttonSearch should not update userSearch variable`() {
         runTest {
             //When
             testViewModel.onTextChanged("")
@@ -132,10 +130,10 @@ class HomeViewModelTest {
     }
 
 
-
     companion object {
         val expectedTestList = Result.Success(
-            HearthstoneModel(listOf<String>("Claudia", "Jair")))
+            HearthstoneModel(listOf<String>("Claudia", "Jair"))
+        )
 
         val expectedError = Result.Error(Exception())
 
