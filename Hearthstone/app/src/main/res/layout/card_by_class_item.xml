@@ -108,7 +108,7 @@
                 android:layout_marginTop="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_20"
                 android:button="@drawable/selector_favlist_item"
-                android:onCheckedChanged="@{(button, checked)-> viewModel.checkFavorite(button, checked, cardModel)}"
+                android:onCheckedChanged="@{(button, checked)-> viewModel.checkFavorite(checked, cardModel)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:useMaterialThemeColors="false" />

@@ -9,10 +9,8 @@ import com.example.hearthstone.data.network.repo.HSRepoImpl
 import com.example.hearthstone.database.dao.HearthstoneDAO
 import com.example.hearthstone.database.model.HearthstoneEntity
 import com.example.hearthstone.dialogue.ErrorDialog
-import io.mockk.coEvery
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.unmockkAll
+import com.example.hearthstone.ui.homepage.HomeViewModelTest
+import io.mockk.*
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -180,7 +178,6 @@ class SearchPageViewModelTest {
     fun `getCardData should return a HearthstoneEntity, to check it we will put it in the DB`() {
         val result = testViewModel.getCardData(obHSCardsByClassModel)
         runTest {
-
             coEvery { mockDB.getAll() } returns listOf(result, obHearthstoneEntity)
             (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
         }
@@ -190,18 +187,94 @@ class SearchPageViewModelTest {
     }
 
     @Test
-    fun `insertCard`() {
+    fun `insertCard should call the insertCard function of the database`() {
         runTest {
-            coEvery { testViewModel.getAllCards() }
-
-            //when
+            //When
             testViewModel.insertCard(obHSCardsByClassModel)
             (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
         }
         //Then
-        assertEquals(1, mockDB.getAll().size)
+        verify { mockDB.insertCard(any()) }
     }
 
+    @Test
+    fun `deleteCard should call the removeCard function of the database`() {
+        runTest {
+            //When
+            testViewModel.deleteCard(obHSCardsByClassModel)
+            (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
+        }
+        //Then
+        verify { mockDB.removeCard(any()) }
+    }
+
+    @Test
+    fun `checkFavorite should receive a parameter true and verify that the function insertCard is called`() {
+        runTest {
+            //When
+            testViewModel.checkFavorite(true, obHSCardsByClassModel)
+            (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
+        }
+        //Then
+        verify { mockDB.insertCard(any()) }
+    }
+
+    @Test
+    fun `checkFavorite should receive a parameter false and verify that the function removeCard is called`() {
+        runTest {
+            //When
+            testViewModel.checkFavorite(false, obHSCardsByClassModel)
+            (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
+        }
+        //Then
+        verify { mockDB.removeCard(any())}
+    }
+
+    @Test
+    fun `onTextChange should update query variable`() {
+        runTest {
+            //When
+            testViewModel.onTextChanged("Kotlin")
+
+        }
+        //Then
+        assertEquals(HomeViewModelTest.expectedQuery, testViewModel.query.value)
+    }
+
+    @Test
+    fun `validateSearch should return true`() {
+        //When
+        testViewModel.onTextChanged("Kotlin")
+        val result = testViewModel.validateSearch()
+
+        //Then
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun `validateSearch should return false`() {
+
+        //When
+        testViewModel.onTextChanged("")
+        val result = testViewModel.validateSearch()
+
+
+        //Then
+        assertEquals(false, result)
+    }
+
+    @Test
+    fun `buttonSearch should verify that the function getCardsByName is called`() {
+        runTest {
+            //When
+            testViewModel.onTextChanged("Kotlin")
+            testViewModel.validateSearch()
+            testViewModel.buttonSearch()
+
+        }
+        //Then
+        coVerify { mockRepoImpl.getCardsByName(any()) }
+    }
 
     companion object {
         val expectedTestList = Result.Success(
@@ -226,7 +299,7 @@ class SearchPageViewModelTest {
             },
             mockk(relaxed = true)
         )
-        val expectedListCardsID = listOf<String>("10", "25", "30", "40")
+        val expectedListCardsID = listOf("10", "25", "30", "40")
 
         val obHearthstoneEntity = mockk<HearthstoneEntity>(relaxed = true)
 

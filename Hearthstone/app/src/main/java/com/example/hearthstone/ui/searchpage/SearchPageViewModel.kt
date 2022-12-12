@@ -47,7 +47,7 @@ class SearchPageViewModel @Inject constructor(
 
     var stringResource = app.getString(R.string.search_results_for)
 
-    var _query = MutableLiveData<String>()
+    var query = MutableLiveData<String>()
 
 
 
@@ -75,6 +75,7 @@ class SearchPageViewModel @Inject constructor(
                 is Result.Error -> {
                     _errorDialog.postValue(ErrorDialog())
                 }
+
 
             }
         }
@@ -126,7 +127,7 @@ class SearchPageViewModel @Inject constructor(
         }
     }
 
-    fun checkFavorite(buttonView: CompoundButton, value: Boolean, card: HSCardsByClassModel) {
+    fun checkFavorite(value: Boolean, card: HSCardsByClassModel) {
         if (value) {
             insertCard(card)
         } else {
@@ -134,13 +135,13 @@ class SearchPageViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
-        _query.value = text.toString()
+    fun onTextChanged(text: CharSequence) {
+        query.value = text.toString()
     }
 
     fun validateSearch(): Boolean {
         var isValid = true
-        val textSearch = _query.value
+        val textSearch = query.value
         if (textSearch.isNullOrEmpty()) {
             isValid = false
         }
@@ -149,7 +150,7 @@ class SearchPageViewModel @Inject constructor(
 
     fun buttonSearch() {
         if (validateSearch()) {
-            val nameCard =_query.value.toString()
+            val nameCard =query.value.toString()
             getCardsByName(nameCard)
         }
     }
