@@ -58,6 +58,20 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `getCardsByClass should verify if in the list the index 1 = Jair`() {
+        runTest {
+            //Given
+            coEvery { mockRepoImpl.getCards() } returns expectedTestList
+
+            //When
+            testViewModel.getCardsByClass()
+            (testViewModel.viewModelScope.coroutineContext[Job]?.children?.forEach { it.join() })
+        }
+        //Then
+        assertEquals("Jair", testViewModel.cards.value?.get(1))
+    }
+
+    @Test
     fun `getCardsByClass should return Error`() {
         runTest {
             //Given
@@ -79,7 +93,7 @@ class HomeViewModelTest {
 
         }
         //Then
-        assertEquals(expectedQuery, testViewModel.query.value)
+        assertEquals(expectedQuery, testViewModel._query.value)
     }
 
     @Test

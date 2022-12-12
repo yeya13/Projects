@@ -238,7 +238,7 @@ class SearchPageViewModelTest {
 
         }
         //Then
-        assertEquals(HomeViewModelTest.expectedQuery, testViewModel.query.value)
+        assertEquals(HomeViewModelTest.expectedQuery, testViewModel._query.value)
     }
 
     @Test

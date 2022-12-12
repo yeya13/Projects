@@ -27,7 +27,8 @@ class HomeViewModel @Inject constructor(
     var _userSearch = MutableLiveData<String>()
     var userSearch: LiveData<String> = _userSearch
 
-    var query = MutableLiveData<String>()
+    var _query = MutableLiveData<String>()
+    var query: LiveData<String> = _query
 
     fun getCardsByClass() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -43,12 +44,12 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onTextChanged(text: CharSequence) {
-        query.value = text.toString()
+        _query.value = text.toString()
     }
 
     fun validateSearch(): Boolean {
         var isValid = true
-        val textSearch = query.value
+        val textSearch = _query.value
         if (textSearch.isNullOrEmpty()) {
             isValid = false
         }
@@ -57,7 +58,7 @@ class HomeViewModel @Inject constructor(
 
     fun buttonSearch() {
         if (validateSearch()) {
-            _userSearch.value = query.value.toString()
+            _userSearch.value = _query.value.toString()
         }
     }
 }

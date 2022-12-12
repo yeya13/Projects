@@ -1,8 +1,6 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
-import android.util.Log
-import android.widget.CompoundButton
 
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -47,7 +45,8 @@ class SearchPageViewModel @Inject constructor(
 
     var stringResource = app.getString(R.string.search_results_for)
 
-    var query = MutableLiveData<String>()
+    var _query = MutableLiveData<String>()
+    var query: LiveData<String> = _query
 
 
 
@@ -136,12 +135,12 @@ class SearchPageViewModel @Inject constructor(
     }
 
     fun onTextChanged(text: CharSequence) {
-        query.value = text.toString()
+        _query.value = text.toString()
     }
 
     fun validateSearch(): Boolean {
         var isValid = true
-        val textSearch = query.value
+        val textSearch = _query.value
         if (textSearch.isNullOrEmpty()) {
             isValid = false
         }
@@ -150,7 +149,7 @@ class SearchPageViewModel @Inject constructor(
 
     fun buttonSearch() {
         if (validateSearch()) {
-            val nameCard =query.value.toString()
+            val nameCard =_query.value.toString()
             getCardsByName(nameCard)
         }
     }
