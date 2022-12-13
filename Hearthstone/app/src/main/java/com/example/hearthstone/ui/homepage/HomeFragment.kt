@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getCardsByClass()
         viewModel.cards.observe(viewLifecycleOwner) {
             binding.myRV.adapter = it?.let { cards -> HearthstoneAdapter(cards) }
         }
