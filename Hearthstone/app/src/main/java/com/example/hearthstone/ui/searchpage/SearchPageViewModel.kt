@@ -1,8 +1,6 @@
 package com.example.hearthstone.ui.searchpage
 
 import android.app.Application
-import android.util.Log
-import android.widget.CompoundButton
 
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -25,7 +23,6 @@ import javax.inject.Inject
 class SearchPageViewModel @Inject constructor(
     app: Application,
     private val repo: HSRepo,
-    private val dispatcher: Dispatchers,
     private val db: HearthstoneDAO
 ) :
     AndroidViewModel(app) {
@@ -38,7 +35,7 @@ class SearchPageViewModel @Inject constructor(
     private val _cardsName = MutableLiveData<List<HSCardsByClassModel>?>()
     val cardsName: LiveData<List<HSCardsByClassModel>?> = _cardsName
 
-    private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
+    val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
     private val _errorDialog = MutableLiveData<ErrorDialog>()
     val errorDialog: LiveData<ErrorDialog> = _errorDialog
@@ -49,12 +46,13 @@ class SearchPageViewModel @Inject constructor(
     var stringResource = app.getString(R.string.search_results_for)
 
     var _query = MutableLiveData<String>()
+    var query: LiveData<String> = _query
 
 
 
 
     fun getCardsByClass(className: String) {
-        viewModelScope.launch(dispatcher.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             when(val cardsFetched = repo.getCardsByClass(className)){
                 is Result.Success -> {
                     _cards.postValue(cardsFetched.data)
@@ -68,7 +66,7 @@ class SearchPageViewModel @Inject constructor(
     }
 
     fun getCardsByName(cardName: String) {
-        viewModelScope.launch(dispatcher.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             when(val cardsFetched = repo.getCardsByName(cardName)){
                 is Result.Success -> {
                     _cardsName.postValue(cardsFetched.data)
@@ -77,13 +75,14 @@ class SearchPageViewModel @Inject constructor(
                     _errorDialog.postValue(ErrorDialog())
                 }
 
+
             }
         }
         _userSearch.value = "${stringResource} '$cardName'"
     }
 
     fun getAllID() {
-        viewModelScope.launch(dispatcher.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             _cardsID.postValue(db.getAllId())
         }
     }
@@ -104,7 +103,7 @@ class SearchPageViewModel @Inject constructor(
     fun insertCard(hs: HSCardsByClassModel){
         val obEntity = getCardData(hs)
         viewModelScope.launch {
-            withContext(dispatcher.IO){
+            withContext(Dispatchers.IO){
                 db.insertCard(obEntity)
             }
         }
@@ -113,7 +112,7 @@ class SearchPageViewModel @Inject constructor(
     fun deleteCard(hs: HSCardsByClassModel) {
         val obEntity = getCardData(hs)
         viewModelScope.launch {
-            withContext(dispatcher.IO) {
+            withContext(Dispatchers.IO) {
                 db.removeCard(obEntity)
             }
         }
@@ -121,13 +120,13 @@ class SearchPageViewModel @Inject constructor(
 
     fun getAllCards(){
         viewModelScope.launch {
-            cardList.value = withContext(dispatcher.IO){
+            cardList.value = withContext(Dispatchers.IO){
                 db.getAll()
             }
         }
     }
 
-    fun checkFavorite(buttonView: CompoundButton, value: Boolean, card: HSCardsByClassModel) {
+    fun checkFavorite(value: Boolean, card: HSCardsByClassModel) {
         if (value) {
             insertCard(card)
         } else {
@@ -135,7 +134,7 @@ class SearchPageViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+    fun onTextChanged(text: CharSequence) {
         _query.value = text.toString()
     }
 
