@@ -20,13 +20,12 @@ import javax.inject.Inject
 @HiltViewModel
 class CardOverviewViewModel @Inject constructor(
     app: Application,
-    private val dispatcher: Dispatchers,
     private val db: HearthstoneDAO
 ) : AndroidViewModel(app) {
     private val _cards = MutableLiveData<HSCardsByClassModel>()
     var cards: LiveData<HSCardsByClassModel> = _cards
 
-    private val cardList = MutableLiveData<List<HearthstoneEntity>?>()
+    val cardList = MutableLiveData<List<HearthstoneEntity>?>()
 
     private val _fav = MutableLiveData<Boolean>(false)
     var fav: LiveData<Boolean> = _fav
@@ -79,7 +78,7 @@ class CardOverviewViewModel @Inject constructor(
     fun insertCard() {
         val obFormEntity = getCardData()
         viewModelScope.launch {
-            withContext(dispatcher.IO) {
+            withContext(Dispatchers.IO) {
                 db.insertCard(obFormEntity)
             }
             getAllCards()
@@ -88,7 +87,7 @@ class CardOverviewViewModel @Inject constructor(
 
     fun getAllCards() {
         viewModelScope.launch {
-            cardList.value = withContext(dispatcher.IO) {
+            cardList.value = withContext(Dispatchers.IO) {
                 db.getAll()
             }
         }
@@ -97,7 +96,7 @@ class CardOverviewViewModel @Inject constructor(
     fun queryCard(hsCard: HSCardsByClassModel) {
         _cards.value = hsCard
         viewModelScope.launch {
-            withContext(dispatcher.IO) {
+            withContext(Dispatchers.IO) {
                 val result = db.doDataQuery(hsCard.cardId)
                 if (result == null) {
                     _fav.postValue(false)
@@ -111,14 +110,14 @@ class CardOverviewViewModel @Inject constructor(
     fun deleteUser() {
         val obFormEntity = getCardData()
         viewModelScope.launch {
-            withContext(dispatcher.IO) {
+            withContext(Dispatchers.IO) {
                 db.removeCard(obFormEntity)
             }
             getAllCards()
         }
     }
 
-    fun checkFavorite(button: CompoundButton, isCkecked: Boolean) {
+    fun checkFavorite(isCkecked: Boolean) {
         if (isCkecked) {
             insertCard()
         } else {
