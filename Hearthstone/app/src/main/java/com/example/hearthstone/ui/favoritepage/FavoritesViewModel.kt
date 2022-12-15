@@ -16,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     app: Application,
-    private val dispatcher: Dispatchers,
     private val db: HearthstoneDAO
 ) : AndroidViewModel(app) {
     private val _cardList = MutableLiveData<List<HearthstoneEntity>?>()
@@ -24,7 +23,7 @@ class FavoritesViewModel @Inject constructor(
 
     fun getAllCards(){
         viewModelScope.launch {
-            _cardList.value = withContext(dispatcher.IO){
+            _cardList.value = withContext(Dispatchers.IO){
                 db.getAll()
             }
         }
@@ -33,7 +32,7 @@ class FavoritesViewModel @Inject constructor(
     fun deleteUser(hs: HearthstoneEntity) {
         val obFormEntity = getCardData(hs)
         viewModelScope.launch {
-            withContext(dispatcher.IO) {
+            withContext(Dispatchers.IO) {
                 db.removeCard(obFormEntity)
             }
             getAllCards()
