@@ -22,8 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ShopViewModel @Inject constructor(
     app: Application,
-    private val repo: GooglePlacesRepo,
-    private val dispatcher: Dispatchers
+    private val repo: GooglePlacesRepo
 ) : AndroidViewModel(app) {
 
     private val _places = MutableLiveData<List<ResultProperties>?>()
@@ -34,7 +33,7 @@ class ShopViewModel @Inject constructor(
 
 
     fun getPlaces(location: String) {
-        viewModelScope.launch(dispatcher.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             when( val placesFetched = repo.getPlaces(location)){
                 is Result.Success -> {
                     _places.postValue(placesFetched.data?.results)
