@@ -29,8 +29,8 @@ object Network {
 
     @Singleton
     @Provides
-    fun provideHSRepoApi(api: HearthstoneApi, dispatcher: Dispatchers): HSRepo{
-        return HSRepoImpl(api, dispatcher)
+    fun provideHSRepoApi(api: HearthstoneApi): HSRepo{
+        return HSRepoImpl(api)
     }
 
     @Singleton
@@ -44,7 +44,7 @@ object Network {
 
     @Singleton
     @Provides
-    fun provideGooglePlacesRepoApi(api: GooglePlacesApi, dispatcher: Dispatchers): GooglePlacesRepo{
-        return GooglePlacesRepoImpl(api, dispatcher)
+    fun provideGooglePlacesRepoApi(api: GooglePlacesApi): GooglePlacesRepo{
+        return GooglePlacesRepoImpl(api)
     }
 }
