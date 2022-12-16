@@ -1,6 +1,5 @@
 package com.example.hearthstone.data.network.repo
 
-import android.view.View
 import com.example.hearthstone.data.model.HSCardsByClassModel
 import com.example.hearthstone.data.model.HearthstoneModel
 import com.example.hearthstone.data.model.Result
@@ -11,12 +10,11 @@ import javax.inject.Inject
 
 
 class HSRepoImpl @Inject constructor(
-    private val api: HearthstoneApi,
-    private val dispatcher: Dispatchers
+    private val api: HearthstoneApi
 ) : HSRepo {
 
     override suspend fun getCards(): Result<HearthstoneModel?> {
-        return withContext(dispatcher.IO) {
+        return withContext(Dispatchers.IO) {
             val apiHSApi = api
             val response = apiHSApi.getCards()
             response.body()
